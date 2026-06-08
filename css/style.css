@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --bg: #060b18;
+  --bg-card: #0b1225;
+  --bg-card2: #0f1a30;
+  --blue: #2563eb;
+  --blue2: #3b82f6;
+  --blue-glow: rgba(37,99,235,0.22);
+  --white: #ffffff;
+  --off: #dde6f4;
+  --dim: #7a8fa8;
+  --border: rgba(59,130,246,0.18);
+  --green: #22c55e;
+  --red: #ef4444;
+  --tr: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--white);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+
+/* ===================== PASSWORD GATE ===================== */
+#pgOverlay {
+  position:fixed; inset:0;
+  background:var(--bg);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  z-index:10000;
+  transition:opacity 0.6s ease;
+}
+#pgOverlay.fade { opacity:0; pointer-events:none; }
+#pgOverlay.gone { display:none; }
+.pg-logo {
+  font-family:'Big Shoulders Display',sans-serif;
+  font-weight:900;
+  font-size:clamp(3rem,9vw,5.5rem);
+  color:var(--white);
+  letter-spacing:0.04em;
+  text-shadow:0 0 60px rgba(59,130,246,0.3);
+  margin-bottom:0.2rem;
+}
+.pg-tagline {
+  font-size:0.7rem; color:var(--dim);
+  letter-spacing:0.35em; text-transform:uppercase;
+  margin-bottom:2.5rem;
+}
+.pg-form {
+  width:min(360px,90vw);
+  display:flex; flex-direction:column; gap:0.75rem;
+}
+.pg-lbl { font-size:0.7rem; color:var(--dim); letter-spacing:0.25em; text-transform:uppercase; }
+.pg-inp {
+  width:100%; padding:0.9rem 1.2rem;
+  background:var(--bg-card); border:1.5px solid var(--border); border-radius:10px;
+  color:var(--white); font:1rem 'Courier New',monospace;
+  letter-spacing:0.1em; text-align:center; outline:none;
+  transition:var(--tr);
+}
+.pg-inp:focus { border-color:var(--blue2); box-shadow:0 0 0 3px var(--blue-glow); }
+.pg-inp.bad { border-color:var(--red); animation:shake 0.4s ease; }
+.pg-btn {
+  width:100%; padding:0.875rem;
+  background:var(--blue); color:var(--white);
+  border:none; border-radius:10px;
+  font:800 1rem 'Nunito',sans-serif; letter-spacing:0.06em;
+  cursor:pointer; transition:var(--tr);
+}
+.pg-btn:hover { background:var(--blue2); transform:translateY(-2px); box-shadow:0 8px 20px rgba(37,99,235,0.4); }
+.pg-err { min-height:1rem; font-size:0.78rem; font-weight:700; color:var(--red); text-align:center; }
+
+/* ===================== LOADING OVERLAY ===================== */
+#loadOv {
+  position:fixed; inset:0;
+  background:rgba(6,11,24,0.97);
+  display:flex; align-items:center; justify-content:center;
+  z-index:9999; opacity:0; pointer-events:none;
+  transition:opacity 0.2s ease;
+}
+#loadOv.on { opacity:1; pointer-events:all; }
+#loadOv img { width:100px; height:100px; object-fit:contain; }
+
+/* ===================== MODALS ===================== */
+.moBack {
+  position:fixed; inset:0;
+  background:rgba(0,0,0,0.82);
+  backdrop-filter:blur(8px);
+  display:flex; align-items:center; justify-content:center;
+  z-index:9990; opacity:0; pointer-events:none;
+  transition:opacity 0.3s; padding:1rem;
+}
+.moBack.on { opacity:1; pointer-events:all; }
+.moCard {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:20px; padding:2.25rem 2rem;
+  max-width:430px; width:100%; text-align:center;
+  position:relative; box-shadow:0 24px 60px rgba(0,0,0,0.55);
+  transform:scale(0.94) translateY(12px);
+  transition:transform 0.3s;
+}
+.moBack.on .moCard { transform:scale(1) translateY(0); }
+.moClose {
+  position:absolute; top:1rem; right:1.25rem;
+  background:none; border:none; color:var(--dim);
+  font-size:1.2rem; cursor:pointer; line-height:1;
+  transition:color 0.2s;
+}
+.moClose:hover { color:var(--white); }
+.moIcon { font-size:2.5rem; display:block; margin-bottom:0.75rem; }
+.moTitle { font-size:1.35rem; font-weight:900; margin-bottom:0.5rem; }
+.moText { color:var(--dim); font-size:0.88rem; line-height:1.7; margin-bottom:1.5rem; }
+.moCopyBox {
+  background:var(--bg-card2); border:1px solid var(--border);
+  border-radius:10px; padding:0.875rem 1rem;
+  text-align:left; font-size:0.85rem; color:var(--off);
+  line-height:1.6; margin-bottom:0.875rem;
+}
+
+/* ===================== BUTTONS ===================== */
+.btn {
+  display:flex; align-items:center; justify-content:center; gap:0.5rem;
+  width:100%; padding:0.875rem 1.5rem; border-radius:12px;
+  font:800 0.95rem 'Nunito',sans-serif; border:none; cursor:pointer;
+  transition:var(--tr); text-decoration:none; letter-spacing:0.02em;
+  margin-top:0.625rem;
+}
+.btn-blue { background:var(--blue); color:var(--white); }
+.btn-blue:hover { background:var(--blue2); transform:translateY(-2px); box-shadow:0 8px 20px rgba(37,99,235,0.4); }
+.btn-green { background:var(--green); color:#000; font-weight:900; }
+.btn-green:hover { filter:brightness(1.08); transform:translateY(-2px); box-shadow:0 8px 20px rgba(34,197,94,0.35); }
+.btn-dark { background:#000; color:var(--white); border:2px solid rgba(255,255,255,0.3); }
+.btn-dark:hover { border-color:var(--white); transform:translateY(-2px); }
+.btn-boost { background:linear-gradient(135deg,#9333ea,#ec4899); color:var(--white); font-weight:900; }
+.btn-boost:hover { filter:brightness(1.1); transform:translateY(-2px); box-shadow:0 8px 20px rgba(147,51,234,0.4); }
+.btn-disabled { background:#1a2540 !important; color:#3a4a6a !important; cursor:not-allowed !important; transform:none !important; box-shadow:none !important; filter:none !important; }
+.btn-ghost {
+  background:none; border:none; cursor:pointer;
+  color:var(--dim); font:700 0.8rem 'Nunito',sans-serif;
+  padding:0.5rem; text-decoration:underline; transition:color 0.2s;
+  display:inline-block; margin-top:0.75rem;
+}
+.btn-ghost:hover { color:var(--white); }
+
+/* ===================== BACK ARROW ===================== */
+.backArrow {
+  display:inline-flex; align-items:center; gap:0.5rem;
+  color:var(--dim); text-decoration:none;
+  font:700 0.875rem 'Nunito',sans-serif;
+  padding:1.25rem 1.5rem; transition:color 0.2s;
+}
+.backArrow:hover { color:var(--white); }
+.backArrow svg { width:16px; height:16px; }
+
+/* ===================== SCROLLBAR ===================== */
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--blue); border-radius:3px; }
+
+/* ===================== KEYFRAMES ===================== */
+@keyframes shake {
+  0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)}
+  40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)}
+}
+@keyframes fadeInUp {
+  from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)}
+}
+@keyframes floatY {
+  0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-8px)}
+}
+@keyframes shine {
+  from{left:-100%} to{left:150%}
+}

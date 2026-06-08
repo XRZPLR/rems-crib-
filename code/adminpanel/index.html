@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Admin — Rem's Crib</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#060b18; --bg2:#0b1225; --bg3:#0f1a30;
+      --blue:#2563eb; --blue2:#3b82f6; --glow:rgba(37,99,235,0.22);
+      --white:#fff; --off:#dde6f4; --dim:#7a8fa8;
+      --border:rgba(59,130,246,0.18);
+      --green:#22c55e; --red:#ef4444;
+      --tr:all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:'Nunito',sans-serif;
+      background:var(--bg); color:var(--white);
+      min-height:100vh; -webkit-font-smoothing:antialiased;
+    }
+    /* SCREENS */
+    .screen{display:none;min-height:100vh;align-items:center;justify-content:center;flex-direction:column;padding:2rem;}
+    .screen.active{display:flex;}
+
+    /* CODE ENTRY */
+    .code-card{
+      background:var(--bg2); border:1px solid var(--border);
+      border-radius:20px; padding:2.5rem 2rem;
+      max-width:420px; width:100%; text-align:center;
+      box-shadow:0 20px 60px rgba(0,0,0,0.4);
+    }
+    .code-icon{font-size:2.5rem;margin-bottom:0.75rem;display:block;}
+    .code-title{font-size:1.4rem;font-weight:900;margin-bottom:0.35rem;}
+    .code-sub{color:var(--dim);font-size:0.85rem;margin-bottom:1.75rem;line-height:1.6;}
+    .code-lbl{font-size:0.68rem;color:var(--dim);letter-spacing:0.25em;text-transform:uppercase;text-align:left;margin-bottom:0.4rem;}
+    .code-inp{
+      width:100%; padding:0.875rem 1.1rem;
+      background:var(--bg3); border:1.5px solid var(--border);
+      border-radius:10px; color:var(--white);
+      font:700 0.95rem 'Nunito',sans-serif;
+      letter-spacing:0.05em; outline:none; transition:var(--tr);
+      margin-bottom:0.75rem;
+    }
+    .code-inp:focus{border-color:var(--blue2);box-shadow:0 0 0 3px var(--glow);}
+    .code-inp.bad{border-color:var(--red);animation:shake 0.4s ease;}
+    .code-btn{
+      width:100%; padding:0.875rem;
+      background:var(--blue); color:var(--white);
+      border:none; border-radius:10px;
+      font:800 1rem 'Nunito',sans-serif; letter-spacing:0.05em;
+      cursor:pointer; transition:var(--tr);
+    }
+    .code-btn:hover{background:var(--blue2);transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,99,235,0.4);}
+    .code-err{min-height:1rem;font-size:0.78rem;font-weight:700;color:var(--red);text-align:center;margin-top:0.5rem;}
+
+    /* ADMIN DASHBOARD */
+    #screenAdmin{padding:0; display:none; flex-direction:column; min-height:100vh; align-items:stretch;}
+    #screenAdmin.active{display:flex;}
+
+    .admin-topbar{
+      background:rgba(6,11,24,0.95); backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+      padding:1rem 2rem; display:flex;
+      align-items:center; justify-content:space-between;
+      position:sticky; top:0; z-index:10;
+    }
+    .admin-logo{font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:1.2rem; letter-spacing:0.06em;}
+    .admin-logo span{color:var(--blue2);}
+    .admin-tag{
+      background:rgba(37,99,235,0.15); border:1px solid rgba(37,99,235,0.3);
+      color:var(--blue2); font:700 0.72rem 'Nunito',sans-serif;
+      letter-spacing:0.15em; text-transform:uppercase;
+      padding:0.3rem 0.75rem; border-radius:6px;
+    }
+
+    .admin-body{max-width:780px;margin:0 auto;padding:2.5rem 1.5rem;width:100%;}
+
+    .admin-section{margin-bottom:2.5rem;}
+    .section-head{
+      font-size:0.7rem; font-weight:800; color:var(--dim);
+      letter-spacing:0.3em; text-transform:uppercase;
+      margin-bottom:1.25rem; padding-bottom:0.625rem;
+      border-bottom:1px solid var(--border);
+    }
+
+    /* TOGGLE */
+    .toggle-row{
+      background:var(--bg2); border:1px solid var(--border);
+      border-radius:14px; padding:1.5rem 1.75rem;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:1rem;
+    }
+    .toggle-info{}
+    .toggle-label{font-size:1rem;font-weight:800;margin-bottom:0.25rem;}
+    .toggle-desc{color:var(--dim);font-size:0.82rem;line-height:1.5;}
+    .toggle-status{
+      font:800 0.8rem 'Nunito',sans-serif;
+      padding:0.3rem 0.75rem; border-radius:8px;
+      margin-top:0.5rem; display:inline-block;
+    }
+    .toggle-status.on{background:rgba(34,197,94,0.15);color:#22c55e;}
+    .toggle-status.off{background:rgba(239,68,68,0.15);color:#ef4444;}
+
+    .switch{
+      position:relative; width:56px; height:30px; flex-shrink:0;
+    }
+    .switch input{opacity:0;width:0;height:0;}
+    .slider{
+      position:absolute; cursor:pointer; inset:0;
+      background:#1a2540; border-radius:30px;
+      transition:0.35s; border:1.5px solid var(--border);
+    }
+    .slider::before{
+      content:''; position:absolute;
+      width:22px; height:22px; left:3px; bottom:3px;
+      background:#475569; border-radius:50%; transition:0.35s;
+    }
+    .switch input:checked + .slider{background:rgba(37,99,235,0.3);border-color:var(--blue);}
+    .switch input:checked + .slider::before{transform:translateX(26px);background:var(--blue2);}
+
+    /* INPUT FIELDS */
+    .field-group{
+      background:var(--bg2); border:1px solid var(--border);
+      border-radius:14px; padding:1.5rem 1.75rem;
+      margin-bottom:1rem;
+    }
+    .field-lbl{font-size:0.72rem;color:var(--dim);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:0.5rem;}
+    .field-inp{
+      width:100%; padding:0.8rem 1rem;
+      background:var(--bg3); border:1.5px solid var(--border);
+      border-radius:10px; color:var(--white);
+      font:600 0.9rem 'Nunito',sans-serif;
+      outline:none; transition:var(--tr);
+      margin-bottom:0.75rem;
+    }
+    .field-inp:focus{border-color:var(--blue2);box-shadow:0 0 0 3px var(--glow);}
+    .field-hint{font-size:0.75rem;color:var(--dim);margin-bottom:0.875rem;line-height:1.5;}
+    .save-btn{
+      padding:0.7rem 1.5rem;
+      background:var(--blue); color:var(--white);
+      border:none; border-radius:10px;
+      font:800 0.88rem 'Nunito',sans-serif;
+      cursor:pointer; transition:var(--tr);
+    }
+    .save-btn:hover{background:var(--blue2);transform:translateY(-1px);}
+    .save-ok{
+      display:inline-block; margin-left:0.75rem;
+      color:var(--green); font-size:0.8rem; font-weight:700;
+      opacity:0; transition:opacity 0.3s;
+    }
+    .save-ok.show{opacity:1;}
+
+    /* DESCRIPTIONS */
+    .desc-group{
+      background:var(--bg2); border:1px solid var(--border);
+      border-radius:14px; padding:1.25rem 1.5rem;
+      margin-bottom:0.875rem;
+    }
+    .desc-tier-name{font-size:0.88rem;font-weight:900;margin-bottom:0.5rem;}
+    .desc-textarea{
+      width:100%; padding:0.75rem 1rem;
+      background:var(--bg3); border:1.5px solid var(--border);
+      border-radius:10px; color:var(--white);
+      font:400 0.85rem 'Nunito',sans-serif;
+      line-height:1.6; resize:vertical; min-height:80px;
+      outline:none; transition:var(--tr);
+      margin-bottom:0.625rem;
+    }
+    .desc-textarea:focus{border-color:var(--blue2);box-shadow:0 0 0 3px var(--glow);}
+    .save-desc-btn{
+      padding:0.55rem 1.1rem;
+      background:var(--bg3); color:var(--dim);
+      border:1px solid var(--border); border-radius:8px;
+      font:700 0.8rem 'Nunito',sans-serif;
+      cursor:pointer; transition:var(--tr);
+    }
+    .save-desc-btn:hover{border-color:var(--blue2);color:var(--white);}
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar{width:5px;}
+    ::-webkit-scrollbar-track{background:var(--bg);}
+    ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px;}
+
+    /* KEYFRAMES */
+    @keyframes shake{
+      0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)}
+      40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)}
+    }
+    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .admin-body{animation:fadeIn 0.4s ease both;}
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 1 — FIRST CODE
+═══════════════════════════════════════ -->
+<div class="screen active" id="screen1">
+  <div class="code-card">
+    <span class="code-icon">🔐</span>
+    <div class="code-title">Admin Access</div>
+    <div class="code-sub">Enter your first access code to continue.</div>
+    <div class="code-lbl">Access Code 1</div>
+    <input class="code-inp" id="c1inp" type="password"
+           placeholder="Enter code..." autocomplete="off" spellcheck="false">
+    <button class="code-btn" onclick="checkCode1()">Continue →</button>
+    <div class="code-err" id="c1err"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 2 — SECOND CODE
+═══════════════════════════════════════ -->
+<div class="screen" id="screen2">
+  <div class="code-card">
+    <span class="code-icon">🛡️</span>
+    <div class="code-title">Verification</div>
+    <div class="code-sub">One more step — enter your second code.</div>
+    <div class="code-lbl">Access Code 2</div>
+    <input class="code-inp" id="c2inp" type="password"
+           placeholder="Enter code..." autocomplete="off" spellcheck="false">
+    <button class="code-btn" onclick="checkCode2()">Enter Admin →</button>
+    <div class="code-err" id="c2err"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 3 — ADMIN DASHBOARD
+═══════════════════════════════════════ -->
+<div id="screenAdmin">
+  <div class="admin-topbar">
+    <div class="admin-logo">REMS <span>CRIB</span> Admin</div>
+    <div class="admin-tag">⚙️ Control Panel</div>
+  </div>
+
+  <div class="admin-body">
+
+    <!-- ─── TIER 6 TOGGLE ─── -->
+    <div class="admin-section">
+      <div class="section-head">Tier 6 Sale Status</div>
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <div class="toggle-label">Tier 6 — LIMITED EDITION</div>
+          <div class="toggle-desc">Toggle whether Tier 6 is available for purchase. When OFF, the card is greyed out and the buy button is disabled on the store.</div>
+          <div class="toggle-status" id="t6StatusLabel">● ON SALE</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="t6Toggle" onchange="saveT6()">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- ─── LINKS ─── -->
+    <div class="admin-section">
+      <div class="section-head">Redirect Links</div>
+
+      <div class="field-group">
+        <div class="field-lbl">Discord Invite URL</div>
+        <div class="field-hint">This applies to every Discord button on the entire site.</div>
+        <input class="field-inp" id="discordInp" type="url" placeholder="https://discord.gg/...">
+        <button class="save-btn" onclick="saveDiscord()">Save</button>
+        <span class="save-ok" id="discordOk">✓ Saved</span>
+      </div>
+
+      <div class="field-group">
+        <div class="field-lbl">Telegram URL</div>
+        <div class="field-hint">This applies to every Telegram button on the entire site.</div>
+        <input class="field-inp" id="telegramInp" type="text" placeholder="https://t.me/yourusername">
+        <button class="save-btn" onclick="saveTelegram()">Save</button>
+        <span class="save-ok" id="telegramOk">✓ Saved</span>
+      </div>
+    </div>
+
+    <!-- ─── DESCRIPTIONS ─── -->
+    <div class="admin-section">
+      <div class="section-head">Tier Descriptions</div>
+      <div id="descList"></div>
+      <button class="save-btn" onclick="saveAllDescs()" style="width:100%;padding:0.875rem;">
+        Save All Descriptions
+      </button>
+      <span class="save-ok" id="descOk" style="display:block;text-align:center;margin-top:0.5rem;">✓ Saved</span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ═══════════ CODES (owner-only knowledge) ═══════════
+const C1 = 'ASFUH SDF8F DF98G 9DF8BDFI8 DFBIH0 DFG98389 WEFJ';
+const C2 = 'SECOND 23RF DWEF';
+let c1Passed = false;
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const admin = document.getElementById('screenAdmin');
+  if (id === 'admin') {
+    admin.classList.add('active');
+    loadAdminValues();
+  } else {
+    admin.classList.remove('active');
+    document.getElementById(id).classList.add('active');
+  }
+}
+
+function checkCode1() {
+  const v = document.getElementById('c1inp').value;
+  if (v === C1) {
+    c1Passed = true;
+    showScreen('screen2');
+    document.getElementById('c2inp').focus();
+  } else {
+    const inp = document.getElementById('c1inp');
+    inp.classList.add('bad');
+    document.getElementById('c1err').textContent = 'Incorrect code.';
+    inp.value = '';
+    setTimeout(() => inp.classList.remove('bad'), 450);
+  }
+}
+
+function checkCode2() {
+  if (!c1Passed) { showScreen('screen1'); return; }
+  const v = document.getElementById('c2inp').value;
+  if (v === C2) {
+    showScreen('admin');
+  } else {
+    const inp = document.getElementById('c2inp');
+    inp.classList.add('bad');
+    document.getElementById('c2err').textContent = 'Incorrect code.';
+    inp.value = '';
+    setTimeout(() => inp.classList.remove('bad'), 450);
+  }
+}
+
+// Enter key support
+['c1inp','c2inp'].forEach((id,i) => {
+  document.getElementById(id).addEventListener('keydown', e => {
+    if (e.key === 'Enter') i === 0 ? checkCode1() : checkCode2();
+    document.getElementById(['c1err','c2err'][i]).textContent = '';
+  });
+});
+
+// ═══════════ ADMIN VALUES ═══════════
+const DEFAULTS = {
+  discord:'https://discord.gg/aj8Rep3n4V',
+  telegram:'https://t.me/remscrib',
+  tier6_sale: true,
+  descs: {
+    access: "Full server access — chat, exclusive channels, and Tier 1 content. Your gateway into Rem's Crib.",
+    tier1: "Same as Access — your entry into the Crib. Tier 1 content plus full server access.",
+    tier2: "Everything in Tier 1, plus a bigger selection of videos and exclusive content.",
+    tier3: "Everything in Tier 2, plus an even larger collection. Seriously good stuff.",
+    tier4: "Everything in Tier 3, times 4. Over four times the content. A serious archive.",
+    tier5: "Everything in Tier 4, times 13. The full vault. This is it.",
+    tier6: "LIMITED EDITION. Rarer than rare. Beyond everything else — the complete collection. Cannot be earned with invites."
+  }
+};
+
+const TIER_LABELS = {
+  access:'ACCESS', tier1:'TIER 1', tier2:'TIER 2',
+  tier3:'TIER 3', tier4:'TIER 4', tier5:'TIER 5', tier6:'TIER 6 — LIMITED'
+};
+
+function loadAdminValues() {
+  // Discord
+  document.getElementById('discordInp').value =
+    localStorage.getItem('rc_discord') || DEFAULTS.discord;
+
+  // Telegram
+  document.getElementById('telegramInp').value =
+    localStorage.getItem('rc_telegram') || DEFAULTS.telegram;
+
+  // Tier 6 toggle
+  const t6 = localStorage.getItem('rc_tier6_sale');
+  const onSale = t6 === null ? true : t6 === 'true';
+  document.getElementById('t6Toggle').checked = onSale;
+  updateT6Label(onSale);
+
+  // Descriptions
+  let descs;
+  try { descs = JSON.parse(localStorage.getItem('rc_descs') || '{}'); }
+  catch(e) { descs = {}; }
+
+  const container = document.getElementById('descList');
+  container.innerHTML = '';
+  Object.keys(TIER_LABELS).forEach(id => {
+    const val = descs[id] || DEFAULTS.descs[id] || '';
+    container.innerHTML += `
+      <div class="desc-group">
+        <div class="desc-tier-name">${TIER_LABELS[id]}</div>
+        <textarea class="desc-textarea" id="descTA_${id}" rows="3">${val}</textarea>
+      </div>
+    `;
+  });
+}
+
+function updateT6Label(onSale) {
+  const el = document.getElementById('t6StatusLabel');
+  if (onSale) {
+    el.textContent = '● ON SALE'; el.className = 'toggle-status on';
+  } else {
+    el.textContent = '● OFF SALE'; el.className = 'toggle-status off';
+  }
+}
+
+// ═══════════ SAVE FUNCTIONS ═══════════
+function saveT6() {
+  const onSale = document.getElementById('t6Toggle').checked;
+  localStorage.setItem('rc_tier6_sale', String(onSale));
+  updateT6Label(onSale);
+}
+
+function flashOk(id) {
+  const el = document.getElementById(id);
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+function saveDiscord() {
+  const v = document.getElementById('discordInp').value.trim();
+  if (v) { localStorage.setItem('rc_discord', v); flashOk('discordOk'); }
+}
+
+function saveTelegram() {
+  const v = document.getElementById('telegramInp').value.trim();
+  if (v) { localStorage.setItem('rc_telegram', v); flashOk('telegramOk'); }
+}
+
+function saveAllDescs() {
+  let descs = {};
+  Object.keys(TIER_LABELS).forEach(id => {
+    const ta = document.getElementById('descTA_' + id);
+    if (ta) descs[id] = ta.value.trim();
+  });
+  localStorage.setItem('rc_descs', JSON.stringify(descs));
+  flashOk('descOk');
+}
+</script>
+</body>
+</html>

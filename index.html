@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Rem's Crib</title>
+  <meta name="description" content="Official website of Rem's Crib.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* ---------- STICKY TOPBAR ---------- */
+    .site-nav {
+      position:fixed; top:0; left:0; right:0; z-index:500;
+      padding:1rem 2rem;
+      display:flex; align-items:center; justify-content:center;
+      transition:background 0.4s, backdrop-filter 0.4s;
+    }
+    .site-nav.scrolled {
+      background:rgba(6,11,24,0.88);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-logo {
+      font-family:'Big Shoulders Display',sans-serif;
+      font-weight:900; font-size:1.4rem;
+      letter-spacing:0.06em; color:#fff;
+      text-decoration:none; text-transform:uppercase;
+      transition:opacity 0.2s;
+    }
+    .nav-logo:hover { opacity:0.75; }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      min-height:100vh; position:relative;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(37,99,235,0.13) 0%, transparent 70%),
+        linear-gradient(175deg, #030810 0%, #071025 55%, #030810 100%);
+      overflow:hidden;
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0;
+      background-image:radial-gradient(rgba(59,130,246,0.1) 1px, transparent 1px);
+      background-size:44px 44px; pointer-events:none;
+    }
+    .hero::after {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(circle 300px at 20% 70%, rgba(37,99,235,0.06) 0%, transparent 70%),
+        radial-gradient(circle 250px at 80% 30%, rgba(59,130,246,0.06) 0%, transparent 70%);
+    }
+    .hero-inner {
+      position:relative; z-index:1; text-align:center;
+      animation:fadeInUp 0.9s ease 0.2s both;
+    }
+    .hero-title {
+      font-family:'Big Shoulders Display',sans-serif;
+      font-weight:900;
+      font-size:clamp(5rem,20vw,16rem);
+      color:#fff; line-height:0.88;
+      letter-spacing:0.03em;
+      text-shadow:0 0 120px rgba(59,130,246,0.18);
+    }
+    .hero-sub {
+      font-size:clamp(0.65rem,1.8vw,0.875rem);
+      color:rgba(255,255,255,0.32);
+      letter-spacing:0.5em; text-transform:uppercase;
+      margin-top:1.5rem;
+    }
+    .scroll-hint {
+      position:absolute; bottom:2.5rem; left:50%;
+      animation:floatY 2.8s ease infinite;
+      display:flex; flex-direction:column; align-items:center; gap:0.4rem;
+      opacity:0.3; user-select:none; cursor:default;
+    }
+    .scroll-hint span { font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; }
+    .scroll-hint svg { width:17px; height:17px; }
+
+    /* ---------- BUTTONS SECTION ---------- */
+    .btns-section {
+      min-height:100vh; background:#fff;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      padding:5rem 1.5rem; position:relative;
+    }
+    .btns-section::before {
+      content:''; position:absolute; top:0; left:0; right:0;
+      height:4px; background:linear-gradient(90deg,#2563eb,#3b82f6,#2563eb);
+    }
+    .btns-eyebrow {
+      font-size:0.7rem; letter-spacing:0.35em;
+      text-transform:uppercase; color:#2563eb; margin-bottom:0.75rem;
+    }
+    .btns-heading {
+      font-size:clamp(1.75rem,5vw,2.75rem); font-weight:900;
+      color:#05101e; margin-bottom:3rem; text-align:center;
+    }
+    .btns-group {
+      display:flex; flex-direction:column; gap:1.1rem;
+      width:100%; max-width:400px;
+    }
+    .main-btn {
+      width:100%; padding:1.2rem 2rem;
+      background:#2563eb; color:#fff;
+      border:none; border-radius:14px;
+      font:800 1.05rem 'Nunito',sans-serif; letter-spacing:0.03em;
+      cursor:pointer; position:relative; overflow:hidden;
+      transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .main-btn::after {
+      content:''; position:absolute; top:0; left:-100%;
+      width:60%; height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.22),transparent);
+      transition:left 0.55s ease;
+    }
+    .main-btn:hover::after { left:150%; }
+    .main-btn:hover { background:#3b82f6; transform:translateY(-3px); box-shadow:0 12px 28px rgba(37,99,235,0.5); }
+    .btns-foot {
+      margin-top:2.5rem; font-size:0.72rem; color:#9ca3af;
+      letter-spacing:0.15em; text-transform:uppercase;
+    }
+    .mo-note-warn { margin-top:1rem; font-size:0.75rem; color:#64748b; font-style:italic; }
+    .mo-note-ok   { margin-top:1rem; font-size:0.8rem; color:#22c55e; font-weight:800; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ PASSWORD GATE ═══ -->
+<div id="pgOverlay">
+  <div class="pg-logo">REM'S CRIB</div>
+  <div class="pg-tagline">Members Only</div>
+  <div class="pg-form">
+    <div class="pg-lbl">Access Code</div>
+    <input class="pg-inp" id="pgInp" type="text"
+           placeholder="••••••••••••"
+           autocomplete="off" spellcheck="false">
+    <div class="pg-err" id="pgErr"></div>
+    <button class="pg-btn" id="pgBtn">ENTER SITE →</button>
+  </div>
+</div>
+
+<!-- ═══ LOADING OVERLAY ═══ -->
+<div id="loadOv">
+  <img src="https://i.postimg.cc/PJhdc8ht/transparent-loading-gif.gif" alt="">
+</div>
+
+<!-- ═══ DISCORD MODAL ═══ -->
+<div class="moBack" id="moDiscord">
+  <div class="moCard">
+    <button class="moClose" onclick="closeMo('moDiscord')">✕</button>
+    <span class="moIcon">💬</span>
+    <div class="moTitle">Join the Discord</div>
+    <div class="moText">The server is live. Come through, hang out, and check out the tiers.</div>
+    <button class="btn btn-blue" onclick="goTo(getDiscord())">Open Discord Server →</button>
+    <div class="mo-note-warn">⚠️ The Discord may rarely be banned or limited</div>
+  </div>
+</div>
+
+<!-- ═══ TELEGRAM MODAL ═══ -->
+<div class="moBack" id="moTelegram">
+  <div class="moCard">
+    <button class="moClose" onclick="closeMo('moTelegram')">✕</button>
+    <span class="moIcon">✈️</span>
+    <div class="moTitle">Telegram</div>
+    <div class="moText">Fast and reliable — reach out on Telegram anytime.</div>
+    <button class="btn btn-blue" onclick="goTo(getTelegram())">Open Telegram →</button>
+    <div class="mo-note-ok">✅ The Telegram is up and running!</div>
+  </div>
+</div>
+
+<!-- ═══ STICKY TOPBAR ═══ -->
+<nav class="site-nav" id="siteNav">
+  <a href="/" class="nav-logo">Rem's Crib</a>
+</nav>
+
+<!-- ═══ HERO SECTION ═══ -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-title">REM'S<br>CRIB</h1>
+    <p class="hero-sub">Official Website</p>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══ BUTTONS SECTION ═══ -->
+<section class="btns-section">
+  <div class="btns-eyebrow">What can we help with?</div>
+  <h2 class="btns-heading">Choose your path.</h2>
+  <div class="btns-group">
+    <button class="main-btn" onclick="goBuy()">🛒&nbsp;&nbsp;Buy or View Tiers</button>
+    <button class="main-btn" onclick="openMo('moTelegram')">✈️&nbsp;&nbsp;Telegram</button>
+    <button class="main-btn" onclick="openMo('moDiscord')">💬&nbsp;&nbsp;Discord</button>
+  </div>
+  <div class="btns-foot">Rem's Crib · remscrib.com</div>
+</section>
+
+<script>
+// ═══ CONFIG ═══
+const GIF = 'https://i.postimg.cc/PJhdc8ht/transparent-loading-gif.gif';
+const CHK = 'https://i.postimg.cc/L5tjKWWQ/check.png';
+function getDiscord() { return localStorage.getItem('rc_discord') || 'https://discord.gg/aj8Rep3n4V'; }
+function getTelegram(){ return localStorage.getItem('rc_telegram') || 'https://t.me/remscrib'; }
+
+// ═══ PASSWORD GATE — SHA-256 HASHED (no plaintext in source) ═══
+const SKEY = 'rc_auth';
+// Hash of password + salt — the real password never appears here
+const PH   = 'e5211191c407b91c9888581f045ea594c7c80dbfc3c3f9d1c2c7254830275a5d';
+const PS   = 'rc_salt_xj9';
+
+const ov  = document.getElementById('pgOverlay');
+const inp = document.getElementById('pgInp');
+const err = document.getElementById('pgErr');
+const lo  = document.getElementById('loadOv');
+const loI = lo.querySelector('img');
+
+if (localStorage.getItem(SKEY) === '1') ov.classList.add('gone');
+
+async function hashStr(s) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function tryPass() {
+  const v = inp.value.trim();
+  const h = await hashStr(v + PS);
+  if (h === PH) {
+    localStorage.setItem(SKEY, '1');
+    ov.classList.add('fade');
+    setTimeout(() => ov.classList.add('gone'), 650);
+  } else {
+    err.textContent = 'Wrong password. Capital letters required.';
+    inp.classList.add('bad');
+    inp.value = '';
+    setTimeout(() => inp.classList.remove('bad'), 450);
+  }
+}
+
+document.getElementById('pgBtn').addEventListener('click', tryPass);
+inp.addEventListener('keydown', e => {
+  err.textContent = '';
+  if (e.key === 'Enter') tryPass();
+});
+
+// ═══ SCROLL: fade-in topbar ═══
+window.addEventListener('scroll', () => {
+  document.getElementById('siteNav').classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ═══ HELPERS ═══
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+async function goTo(url) {
+  loI.src = GIF; lo.classList.add('on');
+  await sleep(700);
+  loI.src = CHK; await sleep(1000);
+  lo.classList.remove('on');
+  window.open(url, '_blank');
+}
+async function goBuy() {
+  loI.src = GIF; lo.classList.add('on');
+  await sleep(1000);
+  loI.src = CHK; await sleep(1000);
+  lo.classList.remove('on');
+  window.location.href = '/buying.html';
+}
+
+// ═══ MODALS ═══
+function openMo(id)  { document.getElementById(id).classList.add('on'); }
+function closeMo(id) { document.getElementById(id).classList.remove('on'); }
+document.querySelectorAll('.moBack').forEach(el => {
+  el.addEventListener('click', e => { if (e.target === el) el.classList.remove('on'); });
+});
+</script>
+</body>
+</html>
