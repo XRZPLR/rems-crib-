@@ -10,8 +10,6 @@
   <link rel="stylesheet" href="/css/style.css">
   <style>
     body { background:var(--bg); }
-
-    /* ---------- TOPBAR ---------- */
     .topbar {
       position:sticky; top:0; z-index:100;
       background:rgba(6,11,24,0.9); backdrop-filter:blur(12px);
@@ -20,8 +18,7 @@
       padding:0.875rem 1.75rem;
     }
     .topbar-logo {
-      font-family:'Big Shoulders Display',sans-serif;
-      font-weight:900;
+      font-family:'Big Shoulders Display',sans-serif; font-weight:900;
       font-size:1.4rem; letter-spacing:0.06em;
       color:var(--white); text-decoration:none;
     }
@@ -32,526 +29,286 @@
     }
     .back-btn:hover { color:var(--white); }
     .back-btn svg { width:15px; height:15px; }
-
-    /* ---------- PAGE HEADER ---------- */
-    .page-header {
-      text-align:center; padding:3rem 1.5rem 2rem;
-      animation:fadeInUp 0.7s ease both;
-    }
-    .page-eyebrow {
-      font-size:0.7rem; letter-spacing:0.35em;
-      text-transform:uppercase; color:var(--blue);
-      margin-bottom:0.5rem;
-    }
-    .page-title {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(2.5rem,8vw,5rem);
-      color:var(--white); letter-spacing:0.04em; line-height:1;
-    }
-    .page-sub {
-      margin-top:0.875rem; color:var(--dim);
-      font-size:0.9rem; line-height:1.6;
-      max-width:460px; margin-left:auto; margin-right:auto;
-    }
-
-    /* ---------- TIER GRID ---------- */
-    .tiers-wrap {
-      max-width:880px; margin:0 auto;
-      padding:1.5rem 1.25rem 5rem;
-    }
-
-    /* ACCESS — full width special card */
+    .page-header { text-align:center; padding:3rem 1.5rem 2rem; animation:fadeInUp 0.7s ease both; }
+    .page-eyebrow { font-size:0.7rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--blue); margin-bottom:0.5rem; }
+    .page-title { font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:clamp(2.5rem,8vw,5rem); color:var(--white); letter-spacing:0.04em; line-height:1; }
+    .page-sub { margin-top:0.875rem; color:var(--dim); font-size:0.9rem; line-height:1.6; max-width:460px; margin-left:auto; margin-right:auto; }
+    .tiers-wrap { max-width:880px; margin:0 auto; padding:1.5rem 1.25rem 5rem; }
     .access-card {
-      background:linear-gradient(135deg, #0b1530 0%, #0d1d3d 50%, #0b1530 100%);
-      border:1.5px solid rgba(37,99,235,0.4);
-      border-radius:18px; padding:2rem;
+      background:linear-gradient(135deg,#0b1530 0%,#0d1d3d 50%,#0b1530 100%);
+      border:1.5px solid rgba(37,99,235,0.4); border-radius:18px; padding:2rem;
       margin-bottom:1.5rem; position:relative; overflow:hidden;
-      cursor:pointer; transition:var(--tr);
-      animation:fadeInUp 0.6s ease 0.1s both;
+      cursor:pointer; transition:var(--tr); animation:fadeInUp 0.6s ease 0.1s both;
     }
-    .access-card::before {
-      content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
-      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.04),transparent);
-    }
+    .access-card::before { content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.04),transparent); }
     .access-card:hover::before { animation:shine 0.6s ease forwards; }
-    .access-card:hover { border-color:var(--blue2); box-shadow:0 8px 40px rgba(37,99,235,0.25); transform:translateY(-2px); }
-    .access-label {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:0.75rem; letter-spacing:0.35em;
-      color:var(--blue2); text-transform:uppercase; margin-bottom:0.5rem;
-    }
-    .access-name {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(2.5rem,6vw,3.5rem);
-      color:var(--white); letter-spacing:0.04em; line-height:1;
-    }
-    .access-price {
-      font-size:1.75rem; font-weight:900; color:var(--blue2);
-      margin-top:0.25rem;
-    }
-    .access-desc {
-      color:var(--dim); font-size:0.88rem; line-height:1.65;
-      margin-top:0.75rem; max-width:550px;
-    }
-    .access-cta {
-      display:inline-flex; align-items:center; gap:0.4rem;
-      margin-top:1.25rem; font-size:0.85rem; font-weight:800;
-      color:var(--blue2);
-    }
-    .access-glow {
-      position:absolute; top:-60px; right:-60px;
-      width:200px; height:200px;
-      background:radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
-      pointer-events:none;
-    }
-
-    /* TIER GRID (Tier 1–6) */
-    .tier-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-      gap:1.1rem;
-    }
-
+    .access-card:hover { box-shadow:0 8px 40px rgba(37,99,235,0.25); transform:translateY(-2px); }
+    .access-label { font-size:0.75rem; letter-spacing:0.35em; text-transform:uppercase; margin-bottom:0.5rem; }
+    .access-name { font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:clamp(2.5rem,6vw,3.5rem); color:var(--white); letter-spacing:0.04em; line-height:1; }
+    .access-price { font-size:1.75rem; font-weight:900; margin-top:0.25rem; }
+    .access-desc { color:var(--dim); font-size:0.88rem; line-height:1.65; margin-top:0.75rem; max-width:550px; }
+    .access-cta { display:inline-flex; align-items:center; gap:0.4rem; margin-top:1.25rem; font-size:0.85rem; font-weight:800; }
+    .access-glow { position:absolute; top:-60px; right:-60px; width:200px; height:200px; pointer-events:none; }
+    .tier-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.1rem; }
     .tier-card {
       background:var(--bg-card); border:1px solid var(--border);
       border-radius:16px; padding:1.5rem 1.5rem 1.75rem;
       cursor:pointer; position:relative; overflow:hidden;
-      transition:var(--tr);
-      animation:fadeInUp 0.6s ease both;
+      transition:var(--tr); animation:fadeInUp 0.6s ease both;
     }
-    .tier-card::before {
-      content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
-      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent);
-    }
+    .tier-card::before { content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent); }
     .tier-card:hover::before { animation:shine 0.6s ease forwards; }
-    .tier-card:hover { border-color:rgba(59,130,246,0.4); box-shadow:0 8px 30px rgba(0,0,0,0.3); transform:translateY(-3px); }
-
-    /* Tier 6 limited styling */
-    .tier-card.t6 { border-color:rgba(217,119,6,0.35); }
-    .tier-card.t6:hover { border-color:rgba(217,119,6,0.7); box-shadow:0 8px 30px rgba(217,119,6,0.15); }
-
-    .tier-badge {
-      font-size:0.68rem; letter-spacing:0.3em;
-      text-transform:uppercase; color:var(--dim);
-      margin-bottom:0.5rem;
-    }
-    .tier-badge.t6c { color:#d97706; }
-    .tier-name {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:2.25rem; color:var(--white);
-      letter-spacing:0.04em; line-height:1;
-    }
-    .tier-price {
-      font-size:1.5rem; font-weight:900;
-      color:var(--blue2); margin-top:0.2rem;
-    }
-    .tier-price.t6p { color:#d97706; }
-    .tier-desc {
-      color:var(--dim); font-size:0.82rem;
-      line-height:1.6; margin-top:0.75rem;
-    }
-    .tier-cta {
-      display:inline-flex; align-items:center; gap:0.4rem;
-      margin-top:1.1rem; font-size:0.82rem; font-weight:800;
-      color:var(--blue2);
-    }
-    .tier-cta.t6c { color:#d97706; }
-
-    /* Limited badge */
-    .limited-badge {
-      position:absolute; top:1rem; right:1rem;
-      background:#d97706; color:#000;
-      font:800 0.65rem 'Nunito',sans-serif;
-      letter-spacing:0.1em; text-transform:uppercase;
-      padding:0.25rem 0.6rem; border-radius:6px;
-    }
-    .sold-badge {
-      position:absolute; top:1rem; right:1rem;
-      background:#1f2937; color:#6b7280;
-      font:800 0.65rem 'Nunito',sans-serif;
-      letter-spacing:0.1em; text-transform:uppercase;
-      padding:0.25rem 0.6rem; border-radius:6px;
-    }
-    .tier-card.off-sale { opacity:0.6; cursor:default; }
+    .tier-card:hover { box-shadow:0 8px 30px rgba(0,0,0,0.3); transform:translateY(-3px); }
+    .tier-card.off-sale { opacity:0.55; cursor:default; }
     .tier-card.off-sale:hover { transform:none; box-shadow:none; }
-
-    /* ---------- BUY FLOW MODAL ---------- */
-    /* This modal has internal states: loading, telegram, disc-load, discord */
+    .tier-badge { font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase; margin-bottom:0.5rem; }
+    .tier-name { font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:2.25rem; color:var(--white); letter-spacing:0.04em; line-height:1; }
+    .tier-price { font-size:1.5rem; font-weight:900; margin-top:0.2rem; }
+    .tier-desc { color:var(--dim); font-size:0.82rem; line-height:1.6; margin-top:0.75rem; }
+    .tier-cta { display:inline-flex; align-items:center; gap:0.4rem; margin-top:1.1rem; font-size:0.82rem; font-weight:800; }
+    .limited-badge { position:absolute; top:1rem; right:1rem; color:#000; font:800 0.65rem 'Nunito',sans-serif; letter-spacing:0.1em; text-transform:uppercase; padding:0.25rem 0.6rem; border-radius:6px; }
+    .sold-badge { position:absolute; top:1rem; right:1rem; background:#1f2937; color:#6b7280; font:800 0.65rem 'Nunito',sans-serif; letter-spacing:0.1em; text-transform:uppercase; padding:0.25rem 0.6rem; border-radius:6px; }
     .flow-state { display:none; }
     .flow-state.active { display:block; }
-    .flow-load-wrap {
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      min-height:160px; gap:1rem;
-    }
+    .flow-load-wrap { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:160px; gap:1rem; }
     .flow-load-wrap img { width:90px; height:90px; object-fit:contain; }
     .flow-load-wrap span { color:var(--dim); font-size:0.85rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; }
-
-    /* ---------- BOOST LABEL ---------- */
-    .boost-label {
-      font:900 1.1rem 'Nunito',sans-serif;
-      background:linear-gradient(135deg,#9333ea,#ec4899);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      background-clip:text;
-      display:block; margin-bottom:0.25rem;
-    }
-    .boost-warn {
-      background:rgba(147,51,234,0.1);
-      border:1px solid rgba(147,51,234,0.3);
-      border-radius:8px; padding:0.75rem 1rem;
-      font-size:0.82rem; color:#c084fc;
-      margin-bottom:0.875rem; line-height:1.55;
-    }
-
-    /* Divider */
-    .mo-divider {
-      border:none; border-top:1px solid var(--border);
-      margin:1.25rem 0;
-    }
-    .mo-section-label {
-      font-size:0.7rem; color:var(--dim);
-      letter-spacing:0.25em; text-transform:uppercase;
-      margin-bottom:0.75rem;
-    }
-    .invite-pill {
-      background:rgba(37,99,235,0.15); border:1px solid rgba(37,99,235,0.3);
-      border-radius:8px; padding:0.75rem 1rem;
-      font-size:0.85rem; color:var(--off);
-      margin-bottom:0.875rem; line-height:1.55;
-    }
+    .boost-label { font:900 1.1rem 'Nunito',sans-serif; background:linear-gradient(135deg,#9333ea,#ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:block; margin-bottom:0.25rem; }
+    .boost-warn { background:rgba(147,51,234,0.1); border:1px solid rgba(147,51,234,0.3); border-radius:8px; padding:0.75rem 1rem; font-size:0.82rem; color:#c084fc; margin-bottom:0.875rem; line-height:1.55; }
+    .mo-divider { border:none; border-top:1px solid var(--border); margin:1.25rem 0; }
+    .mo-section-label { font-size:0.7rem; color:var(--dim); letter-spacing:0.25em; text-transform:uppercase; margin-bottom:0.75rem; }
+    .invite-pill { background:rgba(37,99,235,0.15); border:1px solid rgba(37,99,235,0.3); border-radius:8px; padding:0.75rem 1rem; font-size:0.85rem; color:var(--off); margin-bottom:0.875rem; line-height:1.55; }
+    #loadingScreen { display:flex; align-items:center; justify-content:center; min-height:60vh; }
+    #loadingScreen img { width:80px; height:80px; }
   </style>
 </head>
 <body>
+<script>if(localStorage.getItem('rc_auth')!=='1')window.location.replace('/');</script>
 
-<!-- ═══════════════════════════════════════
-     AUTH CHECK
-═══════════════════════════════════════ -->
-<script>
-  if (localStorage.getItem('rc_auth') !== '1') {
-    window.location.replace('/');
-  }
-</script>
+<div id="loadOv"><img src="https://i.postimg.cc/PJhdc8ht/transparent-loading-gif.gif" alt=""></div>
 
-<!-- ═══════════════════════════════════════
-     LOADING OVERLAY
-═══════════════════════════════════════ -->
-<div id="loadOv">
-  <img src="https://i.postimg.cc/PJhdc8ht/transparent-loading-gif.gif" alt="">
-</div>
-
-<!-- ═══════════════════════════════════════
-     BUY FLOW MODAL (multi-state)
-═══════════════════════════════════════ -->
+<!-- BUY FLOW MODAL -->
 <div class="moBack" id="moBuyFlow">
   <div class="moCard">
     <button class="moClose" onclick="closeBuyFlow()">✕</button>
-
-    <!-- State: loading (1s then transitions to telegram) -->
     <div class="flow-state active" id="fsLoad">
       <div class="flow-load-wrap">
         <img src="https://i.postimg.cc/PJhdc8ht/transparent-loading-gif.gif" alt="">
         <span>One sec...</span>
       </div>
     </div>
-
-    <!-- State: telegram contact -->
     <div class="flow-state" id="fsTelegram">
       <span class="moIcon">✈️</span>
       <div class="moTitle">Contact on Telegram</div>
-      <div class="moText">The quickest way to buy. Copy the message below and send it on Telegram.</div>
+      <div class="moText">Copy the message below and send it on Telegram.</div>
       <div class="mo-section-label">Your message</div>
-      <div class="moCopyBox" id="buyMsgBox">Hi! I'm looking forward to buying TIER X! Please send the payment method</div>
-      <button class="btn btn-blue" id="copyTgBtn" onclick="copyMsg()">📋&nbsp; Copy Message</button>
+      <div class="moCopyBox" id="buyMsgBox"></div>
+      <button class="btn btn-blue" id="copyTgBtn" onclick="copyMsg('buyMsgBox','copyTgBtn')">📋&nbsp; Copy Message</button>
       <button class="btn btn-green" onclick="goToTelegram()">Open Official Telegram →</button>
-      <br>
-      <button class="btn-ghost" onclick="showDiscLoad()">Don't got Telegram?</button>
+      <br><button class="btn-ghost" onclick="showDiscLoad()">Don't got Telegram?</button>
     </div>
-
-    <!-- State: discord loading (0.5s) -->
     <div class="flow-state" id="fsDiscLoad">
       <div class="flow-load-wrap">
         <img src="https://i.postimg.cc/PJhdc8ht/transparent-loading-gif.gif" alt="">
         <span>Loading...</span>
       </div>
     </div>
-
-    <!-- State: discord contact -->
     <div class="flow-state" id="fsDiscord">
       <span class="moIcon">💬</span>
       <div class="moTitle">No Telegram? No Problem.</div>
-      <div class="moText">DM <strong>@Rem:3</strong> on Discord to buy your tier. Copy the message below.</div>
+      <div class="moText">DM <strong>@Rem:3</strong> on Discord to buy your tier.</div>
       <div class="mo-section-label">Your message</div>
-      <div class="moCopyBox" id="buyMsgBox2">Hi! I'm looking forward to buying TIER X! Please send the payment method</div>
-      <button class="btn btn-blue" id="copyDiscBtn" onclick="copyMsg2()">📋&nbsp; Copy Message</button>
+      <div class="moCopyBox" id="buyMsgBox2"></div>
+      <button class="btn btn-blue" id="copyDiscBtn" onclick="copyMsg('buyMsgBox2','copyDiscBtn')">📋&nbsp; Copy Message</button>
       <button class="btn btn-green" onclick="goToDiscord()">Open Discord →</button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     INVITE FLOW MODAL
-═══════════════════════════════════════ -->
+<!-- INVITE MODAL -->
 <div class="moBack" id="moInvite">
   <div class="moCard">
     <button class="moClose" onclick="closeMo('moInvite')">✕</button>
     <span class="moIcon">🔗</span>
     <div class="moTitle">Get Access via Invites</div>
-    <div class="invite-pill" id="inviteInstructions">Instructions here</div>
+    <div class="invite-pill" id="inviteInstructions"></div>
     <div class="moText" style="margin-bottom:0.875rem;">Once done, DM <strong>@Rem:3</strong> on Discord to confirm.</div>
     <button class="btn btn-blue" onclick="goToDiscord()">Open Discord →</button>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     BOOST MODAL (Access tier only)
-═══════════════════════════════════════ -->
+<!-- BOOST MODAL -->
 <div class="moBack" id="moBoost">
   <div class="moCard">
     <button class="moClose" onclick="closeMo('moBoost')">✕</button>
     <span class="moIcon">✨</span>
     <span class="boost-label">BOOST</span>
     <div class="moTitle" style="margin-top:0.25rem;">Boost for Access</div>
-    <div class="boost-warn">⚠️ Boosting the server will ONLY unlock Access / Tier 1 — nothing else. No higher tiers are included.</div>
-    <div class="moText" style="margin-bottom:0.875rem;">Go to the Discord server and boost it <strong>once — not twice</strong>. After boosting, DM <strong>@Rem:3</strong> and access will be granted.</div>
+    <div class="boost-warn">⚠️ Boosting will ONLY unlock Access / Tier 1 — nothing else.</div>
+    <div class="moText" style="margin-bottom:0.875rem;">Go to Discord and boost <strong>once — not twice</strong>. Then DM <strong>@Rem:3</strong> and access will be granted.</div>
     <button class="btn btn-boost" onclick="goToDiscord()">Open Discord to Boost →</button>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     TIER DETAIL MODAL
-═══════════════════════════════════════ -->
+<!-- DETAIL MODAL -->
 <div class="moBack" id="moDetail">
   <div class="moCard">
     <button class="moClose" onclick="closeMo('moDetail')">✕</button>
-    <div class="moText" style="font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; margin-bottom:0.3rem;" id="detailBadge">TIER 1</div>
-    <div class="moTitle" style="font-size:2rem; font-family:'Bebas Neue',sans-serif; letter-spacing:0.04em;" id="detailName">TIER 1</div>
-    <div style="font-size:1.6rem; font-weight:900; color:var(--blue2); margin-bottom:1rem;" id="detailPrice">£10</div>
-    <div class="moText" id="detailDesc">Description here.</div>
-
-    <!-- Off sale notice (hidden unless tier6 off sale) -->
-    <div id="offSaleNotice" style="display:none; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); border-radius:8px; padding:0.75rem 1rem; font-size:0.83rem; color:#f87171; margin-bottom:1rem;">
+    <div class="moText" style="font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.3rem;" id="detailBadge"></div>
+    <div class="moTitle" style="font-size:2rem;font-family:'Big Shoulders Display',sans-serif;letter-spacing:0.04em;" id="detailName"></div>
+    <div style="font-size:1.6rem;font-weight:900;margin-bottom:1rem;" id="detailPrice"></div>
+    <div class="moText" id="detailDesc"></div>
+    <div id="offSaleNotice" style="display:none;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:0.75rem 1rem;font-size:0.83rem;color:#f87171;margin-bottom:1rem;">
       ⚠️ This tier is currently <strong>off sale</strong>. Check back later.
     </div>
-
-    <!-- BUY button -->
     <button class="btn btn-green" id="detailBuyBtn" onclick="startBuyFlow()">💳&nbsp; Buy Now</button>
-
-    <!-- BOOST button (Access only) -->
-    <button class="btn btn-boost" id="detailBoostBtn" onclick="openBoost()" style="display:none;">✨ &nbsp;BOOST for Access</button>
-
-    <!-- GET INVITES button (Tier 1-5 & Access) -->
+    <button class="btn btn-boost" id="detailBoostBtn" onclick="openBoost()" style="display:none;">✨&nbsp; BOOST for Access</button>
     <button class="btn btn-dark" id="detailInviteBtn" onclick="startInviteFlow()" style="display:none;">🔗&nbsp; Get with Invites</button>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     TOPBAR
-═══════════════════════════════════════ -->
+<!-- TOPBAR -->
 <div class="topbar">
   <a href="/" class="back-btn">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-      <polyline points="15 18 9 12 15 6"/>
-    </svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
     Back
   </a>
   <a href="/" class="topbar-logo">Rem's Crib</a>
   <div style="width:60px"></div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     PAGE HEADER
-═══════════════════════════════════════ -->
+<!-- PAGE HEADER -->
 <div class="page-header">
   <div class="page-eyebrow">Pick your level</div>
   <h1 class="page-title">Tiers &amp; Pricing</h1>
   <p class="page-sub">Click any tier to view details and pick your payment method.</p>
 </div>
 
-<!-- ═══════════════════════════════════════
-     TIERS GRID
-═══════════════════════════════════════ -->
+<!-- TIERS CONTAINER -->
 <div class="tiers-wrap">
-
-  <!-- ACCESS -->
-  <div class="access-card" onclick="openDetail('access')">
-    <div class="access-glow"></div>
-    <div class="access-label">Featured</div>
-    <div class="access-name">ACCESS</div>
-    <div class="access-price">£10</div>
-    <div class="access-desc" id="desc-access">Full server access — chat, exclusive channels, and Tier 1 content. Your gateway into Rem's Crib.</div>
-    <div class="access-cta">
-      View details
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </div>
-  </div>
-
-  <!-- TIERS 1–6 -->
-  <div class="tier-grid" id="tierGrid">
-
-    <!-- Tier 1 -->
-    <div class="tier-card" onclick="openDetail('tier1')" style="animation-delay:0.1s">
-      <div class="tier-badge">Entry</div>
-      <div class="tier-name">TIER 1</div>
-      <div class="tier-price">£10</div>
-      <div class="tier-desc" id="desc-tier1">Same as Access — your entry into the Crib. Tier 1 content plus full server access.</div>
-      <div class="tier-cta">View &amp; Buy <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
-    </div>
-
-    <!-- Tier 2 -->
-    <div class="tier-card" onclick="openDetail('tier2')" style="animation-delay:0.15s">
-      <div class="tier-badge">Level Up</div>
-      <div class="tier-name">TIER 2</div>
-      <div class="tier-price">£15</div>
-      <div class="tier-desc" id="desc-tier2">Everything in Tier 1, plus a bigger selection of videos and exclusive content.</div>
-      <div class="tier-cta">View &amp; Buy <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
-    </div>
-
-    <!-- Tier 3 -->
-    <div class="tier-card" onclick="openDetail('tier3')" style="animation-delay:0.2s">
-      <div class="tier-badge">Serious</div>
-      <div class="tier-name">TIER 3</div>
-      <div class="tier-price">£30</div>
-      <div class="tier-desc" id="desc-tier3">Everything in Tier 2, plus an even larger collection. Seriously good stuff.</div>
-      <div class="tier-cta">View &amp; Buy <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
-    </div>
-
-    <!-- Tier 4 -->
-    <div class="tier-card" onclick="openDetail('tier4')" style="animation-delay:0.25s">
-      <div class="tier-badge">Deep Cut</div>
-      <div class="tier-name">TIER 4</div>
-      <div class="tier-price">£50</div>
-      <div class="tier-desc" id="desc-tier4">Everything in Tier 3, times 4. Over four times the content. A serious archive.</div>
-      <div class="tier-cta">View &amp; Buy <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
-    </div>
-
-    <!-- Tier 5 -->
-    <div class="tier-card" onclick="openDetail('tier5')" style="animation-delay:0.3s">
-      <div class="tier-badge">The Vault</div>
-      <div class="tier-name">TIER 5</div>
-      <div class="tier-price">£75</div>
-      <div class="tier-desc" id="desc-tier5">Everything in Tier 4, times 13. The full vault. This is it.</div>
-      <div class="tier-cta">View &amp; Buy <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
-    </div>
-
-    <!-- Tier 6 (LIMITED) -->
-    <div class="tier-card t6" id="card-tier6" onclick="openDetail('tier6')" style="animation-delay:0.35s">
-      <div class="tier-badge t6c">Limited Edition</div>
-      <div class="tier-name">TIER 6</div>
-      <div class="tier-price t6p">£100</div>
-      <div class="tier-desc" id="desc-tier6">LIMITED EDITION. Rarer than rare. Beyond everything else — the complete collection. Cannot be earned with invites.</div>
-      <div class="tier-cta t6c">View &amp; Buy <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
-      <div class="limited-badge" id="t6badge">LIMITED</div>
-    </div>
-
-  </div>
+  <div id="accessContainer"></div>
+  <div class="tier-grid" id="tierGrid"></div>
 </div>
 
 <script>
-// ═══════════ CONSTANTS ═══════════
 const GIF = 'https://i.postimg.cc/PJhdc8ht/transparent-loading-gif.gif';
 const CHK = 'https://i.postimg.cc/L5tjKWWQ/check.png';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const lo   = document.getElementById('loadOv');
-const loI  = lo.querySelector('img');
+const lo = document.getElementById('loadOv');
+const loI = lo.querySelector('img');
 
-function getDiscordUrl() { return localStorage.getItem('rc_discord') || 'https://discord.gg/aj8Rep3n4V'; }
-function getTelegramUrl() { return localStorage.getItem('rc_telegram') || 'https://t.me/remscrib'; }
-function isTier6OnSale()  {
-  const v = localStorage.getItem('rc_tier6_sale');
-  return v === null ? true : v === 'true';
-}
-
-// ═══════════ TIER DATA ═══════════
-const TIERS = {
-  access: { label:'ACCESS',  price:'£10',  invites:2,   hasBoost:true,  hasInvites:true,  limited:false,
-    inviteMsg:'Go to the Discord server, make an invite link, and get 2 people to join and stay using it. No alts, no raiders — they must genuinely join and remain. Once confirmed, DM @Rem:3 on Discord and access will be granted.' },
-  tier1:  { label:'TIER 1',  price:'£10',  invites:2,   hasBoost:false, hasInvites:true,  limited:false,
-    inviteMsg:'Go to the Discord server, make an invite link, and get 2 people to join and stay using it. No alts, no raiders. Once confirmed, DM @Rem:3 and Tier 1 will be unlocked.' },
-  tier2:  { label:'TIER 2',  price:'£15',  invites:5,   hasBoost:false, hasInvites:true,  limited:false,
-    inviteMsg:'Go to the Discord server, make an invite link, and get 5 people to join and stay using it. No alts, no raiders. Once confirmed, DM @Rem:3 and Tier 2 will be unlocked.' },
-  tier3:  { label:'TIER 3',  price:'£30',  invites:15,  hasBoost:false, hasInvites:true,  limited:false,
-    inviteMsg:'Go to the Discord server, make an invite link, and get 15 people to join and stay using it. No alts, no raiders. Once confirmed, DM @Rem:3 and Tier 3 will be unlocked.' },
-  tier4:  { label:'TIER 4',  price:'£50',  invites:25,  hasBoost:false, hasInvites:true,  limited:false,
-    inviteMsg:'Go to the Discord server, make an invite link, and get 25 people to join and stay using it. No alts, no raiders. Once confirmed, DM @Rem:3 and Tier 4 will be unlocked.' },
-  tier5:  { label:'TIER 5',  price:'£75',  invites:100, hasBoost:false, hasInvites:true,  limited:false,
-    inviteMsg:'Go to the Discord server, make an invite link, and get 100 people to join and stay using it. No alts, no raiders. Once confirmed, DM @Rem:3 and Tier 5 will be unlocked.' },
-  tier6:  { label:'TIER 6',  price:'£100', invites:0,   hasBoost:false, hasInvites:false, limited:true,
-    inviteMsg:'' }
-};
-
-// Load custom descriptions from admin panel if set
-function getDesc(id) {
-  try {
-    const d = JSON.parse(localStorage.getItem('rc_descs') || '{}');
-    if (d[id]) return d[id];
-  } catch(e) {}
-  return null;
-}
-Object.keys(TIERS).forEach(id => {
-  const el = document.getElementById('desc-' + id);
-  const custom = getDesc(id);
-  if (el && custom) el.textContent = custom;
-});
-
-// Tier 6 on/off sale
-if (!isTier6OnSale()) {
-  const card = document.getElementById('card-tier6');
-  card.classList.add('off-sale');
-  const badge = document.getElementById('t6badge');
-  badge.className = 'sold-badge';
-  badge.textContent = 'OFF SALE';
-}
-
-// ═══════════ ACTIVE TIER STATE ═══════════
+let siteConfig = null;
 let currentTier = null;
 
-// ═══════════ MODAL HELPERS ═══════════
-function openMo(id)  { document.getElementById(id).classList.add('on'); }
-function closeMo(id) { document.getElementById(id).classList.remove('on'); }
+// ═══ LOAD CONFIG ═══
+async function loadConfig() {
+  try {
+    const res = await fetch('/config.json?' + Date.now());
+    siteConfig = await res.json();
+  } catch(e) {
+    siteConfig = {
+      discord: 'https://discord.gg/aj8Rep3n4V',
+      telegram: 'https://t.me/remscrib',
+      tiers: []
+    };
+  }
+  renderTiers();
+}
 
-document.querySelectorAll('.moBack').forEach(el => {
-  el.addEventListener('click', e => { if (e.target === el) el.classList.remove('on'); });
-});
+function getDiscordUrl() { return siteConfig?.discord || 'https://discord.gg/aj8Rep3n4V'; }
+function getTelegramUrl() { return siteConfig?.telegram || 'https://t.me/remscrib'; }
 
-// ═══════════ OPEN TIER DETAIL ═══════════
+// ═══ RENDER TIERS ═══
+function renderTiers() {
+  const tiers = siteConfig.tiers || [];
+  const accessTier = tiers.find(t => t.isAccess);
+  const regularTiers = tiers.filter(t => !t.isAccess);
+
+  if (accessTier) {
+    document.getElementById('accessContainer').innerHTML = buildAccessCard(accessTier);
+  }
+
+  const grid = document.getElementById('tierGrid');
+  grid.innerHTML = regularTiers.map((t, i) => buildTierCard(t, i)).join('');
+}
+
+function buildAccessCard(t) {
+  const bc = t.borderColor || '#2563eb';
+  const pc = t.priceColor || '#3b82f6';
+  const lc = t.labelColor || '#3b82f6';
+  return `
+    <div class="access-card" onclick="openDetail('${t.id}')"
+         style="border-color:${bc}55;">
+      <div class="access-glow" style="background:radial-gradient(circle,${bc}22 0%,transparent 70%);"></div>
+      <div class="access-label" style="color:${lc}">${t.label || ''}</div>
+      <div class="access-name">${t.name}</div>
+      <div class="access-price" style="color:${pc}">${t.price}</div>
+      <div class="access-desc">${t.description}</div>
+      <div class="access-cta" style="color:${pc}">
+        View details
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+    </div>`;
+}
+
+function buildTierCard(t, i) {
+  const bc = t.borderColor || '#2563eb';
+  const pc = t.priceColor || '#3b82f6';
+  const lc = t.labelColor || '#7a8fa8';
+  const off = !t.onSale;
+  const delay = (i + 1) * 0.05;
+
+  let badge = '';
+  if (off) {
+    badge = `<div class="sold-badge">OFF SALE</div>`;
+  } else if (t.limited) {
+    badge = `<div class="limited-badge" style="background:${bc};color:#000">${t.label || 'LIMITED'}</div>`;
+  }
+
+  return `
+    <div class="tier-card ${off ? 'off-sale' : ''}"
+         onclick="${off ? '' : `openDetail('${t.id}')`}"
+         style="border-color:${bc}${off ? '22' : '44'};animation-delay:${delay}s">
+      <div class="tier-badge" style="color:${lc}">${t.label || ''}</div>
+      <div class="tier-name">${t.name}</div>
+      <div class="tier-price" style="color:${off ? '#3a4a6a' : pc}">${t.price}</div>
+      <div class="tier-desc">${t.description}</div>
+      ${!off ? `<div class="tier-cta" style="color:${pc}">View &amp; Buy <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>` : ''}
+      ${badge}
+    </div>`;
+}
+
+// ═══ OPEN TIER DETAIL ═══
 function openDetail(tierId) {
-  const t = TIERS[tierId];
-  currentTier = tierId;
+  const t = siteConfig.tiers.find(x => x.id === tierId);
+  if (!t) return;
+  currentTier = t;
 
-  document.getElementById('detailBadge').textContent = t.label;
-  document.getElementById('detailName').textContent  = t.label;
-  document.getElementById('detailPrice').textContent = t.price;
+  document.getElementById('detailBadge').textContent  = t.name;
+  document.getElementById('detailName').textContent   = t.name;
+  document.getElementById('detailPrice').textContent  = t.price;
+  document.getElementById('detailPrice').style.color  = t.priceColor || '#3b82f6';
+  document.getElementById('detailDesc').textContent   = t.description;
 
-  // Description (custom from admin or default from page)
-  const descEl = document.getElementById('desc-' + tierId);
-  document.getElementById('detailDesc').textContent = descEl ? descEl.textContent : '';
-
-  // Off-sale notice for Tier 6
   const offNotice = document.getElementById('offSaleNotice');
   const buyBtn    = document.getElementById('detailBuyBtn');
-  if (tierId === 'tier6' && !isTier6OnSale()) {
+  if (!t.onSale) {
     offNotice.style.display = 'block';
-    buyBtn.classList.add('btn-disabled');
-    buyBtn.disabled = true;
+    buyBtn.classList.add('btn-disabled'); buyBtn.disabled = true;
   } else {
     offNotice.style.display = 'none';
-    buyBtn.classList.remove('btn-disabled');
-    buyBtn.disabled = false;
+    buyBtn.classList.remove('btn-disabled'); buyBtn.disabled = false;
   }
 
-  // Boost button (Access only)
-  document.getElementById('detailBoostBtn').style.display = t.hasBoost ? 'flex' : 'none';
-
-  // Invite button
-  document.getElementById('detailInviteBtn').style.display = t.hasInvites ? 'flex' : 'none';
-  if (t.hasInvites) {
-    document.getElementById('detailInviteBtn').textContent = `🔗  Get with Invites (${t.invites})`;
-  }
+  document.getElementById('detailBoostBtn').style.display  = t.hasBoost ? 'flex' : 'none';
+  const invBtn = document.getElementById('detailInviteBtn');
+  invBtn.style.display = t.hasInvites ? 'flex' : 'none';
+  if (t.hasInvites) invBtn.textContent = `🔗  Get with Invites (${t.invites})`;
 
   openMo('moDetail');
 }
 
-// ═══════════ BUY FLOW ═══════════
+// ═══ BUY FLOW ═══
 function showFlowState(id) {
   document.querySelectorAll('.flow-state').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -559,13 +316,11 @@ function showFlowState(id) {
 
 async function startBuyFlow() {
   if (!currentTier) return;
-  const label = TIERS[currentTier].label;
-  const msg = `Hi! I'm looking forward to buying ${label}! Please send the payment method`;
+  const msg = `Hi! I'm looking forward to buying ${currentTier.name}! Please send the payment method`;
   document.getElementById('buyMsgBox').textContent  = msg;
   document.getElementById('buyMsgBox2').textContent = msg;
   document.getElementById('copyTgBtn').textContent  = '📋  Copy Message';
   document.getElementById('copyDiscBtn').textContent= '📋  Copy Message';
-
   closeMo('moDetail');
   showFlowState('fsLoad');
   openMo('moBuyFlow');
@@ -581,60 +336,51 @@ async function showDiscLoad() {
 
 function closeBuyFlow() {
   closeMo('moBuyFlow');
-  showFlowState('fsLoad'); // reset for next time
+  setTimeout(() => showFlowState('fsLoad'), 300);
 }
 
-async function copyMsg() {
-  const txt = document.getElementById('buyMsgBox').textContent;
+async function copyMsg(boxId, btnId) {
+  const txt = document.getElementById(boxId).textContent;
   await navigator.clipboard.writeText(txt).catch(() => {});
-  const btn = document.getElementById('copyTgBtn');
-  btn.textContent = '✅  Copied!';
-  setTimeout(() => btn.textContent = '📋  Copy Message', 2000);
-}
-async function copyMsg2() {
-  const txt = document.getElementById('buyMsgBox2').textContent;
-  await navigator.clipboard.writeText(txt).catch(() => {});
-  const btn = document.getElementById('copyDiscBtn');
+  const btn = document.getElementById(btnId);
   btn.textContent = '✅  Copied!';
   setTimeout(() => btn.textContent = '📋  Copy Message', 2000);
 }
 
-// ═══════════ INVITE FLOW ═══════════
 function startInviteFlow() {
   if (!currentTier) return;
-  const t = TIERS[currentTier];
-  document.getElementById('inviteInstructions').textContent = t.inviteMsg;
+  document.getElementById('inviteInstructions').textContent = currentTier.inviteMsg || '';
   closeMo('moDetail');
   openMo('moInvite');
 }
 
-// ═══════════ BOOST ═══════════
-function openBoost() {
-  closeMo('moDetail');
-  openMo('moBoost');
-}
+function openBoost() { closeMo('moDetail'); openMo('moBoost'); }
 
-// ═══════════ REDIRECT WITH ANIMATION ═══════════
 async function goToTelegram() {
   closeMo('moBuyFlow');
   loI.src = GIF; lo.classList.add('on');
-  await sleep(700);
-  loI.src = CHK;
-  await sleep(1000);
+  await sleep(700); loI.src = CHK; await sleep(1000);
   lo.classList.remove('on');
   window.open(getTelegramUrl(), '_blank');
 }
+
 async function goToDiscord() {
-  closeMo('moBuyFlow');
-  closeMo('moInvite');
-  closeMo('moBoost');
+  ['moBuyFlow','moInvite','moBoost'].forEach(id => closeMo(id));
   loI.src = GIF; lo.classList.add('on');
-  await sleep(700);
-  loI.src = CHK;
-  await sleep(1000);
+  await sleep(700); loI.src = CHK; await sleep(1000);
   lo.classList.remove('on');
   window.open(getDiscordUrl(), '_blank');
 }
+
+// ═══ MODALS ═══
+function openMo(id)  { document.getElementById(id).classList.add('on'); }
+function closeMo(id) { document.getElementById(id).classList.remove('on'); }
+document.querySelectorAll('.moBack').forEach(el => {
+  el.addEventListener('click', e => { if (e.target === el) el.classList.remove('on'); });
+});
+
+// ═══ INIT ═══
+loadConfig();
 </script>
 </body>
 </html>

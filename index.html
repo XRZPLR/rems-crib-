@@ -203,11 +203,14 @@
 </section>
 
 <script>
-// ═══ CONFIG ═══
+// ═══ CONFIG — fetched globally so all visitors get the same links ═══
+let _cfg = {};
+fetch('/config.json?' + Date.now()).then(r=>r.json()).then(c=>{ _cfg=c; }).catch(()=>{});
+function getDiscord() { return _cfg.discord || 'https://discord.gg/aj8Rep3n4V'; }
+function getTelegram(){ return _cfg.telegram || 'https://t.me/remscrib'; }
+
 const GIF = 'https://i.postimg.cc/PJhdc8ht/transparent-loading-gif.gif';
 const CHK = 'https://i.postimg.cc/L5tjKWWQ/check.png';
-function getDiscord() { return localStorage.getItem('rc_discord') || 'https://discord.gg/aj8Rep3n4V'; }
-function getTelegram(){ return localStorage.getItem('rc_telegram') || 'https://t.me/remscrib'; }
 
 // ═══ PASSWORD GATE — SHA-256 HASHED (no plaintext in source) ═══
 const SKEY = 'rc_auth';
