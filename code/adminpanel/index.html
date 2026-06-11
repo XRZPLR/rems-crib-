@@ -16,281 +16,220 @@
       --tr:all 0.3s cubic-bezier(0.4,0,0.2,1);
     }
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
-    body{
-      font-family:'Nunito',sans-serif;
-      background:var(--bg); color:var(--white);
-      min-height:100vh; -webkit-font-smoothing:antialiased;
-    }
+    body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--white);min-height:100vh;-webkit-font-smoothing:antialiased;}
+    ::-webkit-scrollbar{width:5px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px;}
+    @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
     /* SCREENS */
     .screen{display:none;min-height:100vh;align-items:center;justify-content:center;flex-direction:column;padding:2rem;}
     .screen.active{display:flex;}
+    #screenAdmin{display:none;flex-direction:column;min-height:100vh;align-items:stretch;}
+    #screenAdmin.active{display:flex;}
 
     /* CODE ENTRY */
-    .code-card{
-      background:var(--bg2); border:1px solid var(--border);
-      border-radius:20px; padding:2.5rem 2rem;
-      max-width:420px; width:100%; text-align:center;
-      box-shadow:0 20px 60px rgba(0,0,0,0.4);
-    }
+    .code-card{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:2.5rem 2rem;max-width:420px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.4);}
     .code-icon{font-size:2.5rem;margin-bottom:0.75rem;display:block;}
     .code-title{font-size:1.4rem;font-weight:900;margin-bottom:0.35rem;}
     .code-sub{color:var(--dim);font-size:0.85rem;margin-bottom:1.75rem;line-height:1.6;}
     .code-lbl{font-size:0.68rem;color:var(--dim);letter-spacing:0.25em;text-transform:uppercase;text-align:left;margin-bottom:0.4rem;}
-    .code-inp{
-      width:100%; padding:0.875rem 1.1rem;
-      background:var(--bg3); border:1.5px solid var(--border);
-      border-radius:10px; color:var(--white);
-      font:700 0.95rem 'Nunito',sans-serif;
-      letter-spacing:0.05em; outline:none; transition:var(--tr);
-      margin-bottom:0.75rem;
-    }
+    .code-inp{width:100%;padding:0.875rem 1.1rem;background:var(--bg3);border:1.5px solid var(--border);border-radius:10px;color:var(--white);font:700 0.95rem 'Nunito',sans-serif;letter-spacing:0.05em;outline:none;transition:var(--tr);margin-bottom:0.75rem;}
     .code-inp:focus{border-color:var(--blue2);box-shadow:0 0 0 3px var(--glow);}
     .code-inp.bad{border-color:var(--red);animation:shake 0.4s ease;}
-    .code-btn{
-      width:100%; padding:0.875rem;
-      background:var(--blue); color:var(--white);
-      border:none; border-radius:10px;
-      font:800 1rem 'Nunito',sans-serif; letter-spacing:0.05em;
-      cursor:pointer; transition:var(--tr);
-    }
+    .code-btn{width:100%;padding:0.875rem;background:var(--blue);color:var(--white);border:none;border-radius:10px;font:800 1rem 'Nunito',sans-serif;letter-spacing:0.05em;cursor:pointer;transition:var(--tr);}
     .code-btn:hover{background:var(--blue2);transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,99,235,0.4);}
     .code-err{min-height:1rem;font-size:0.78rem;font-weight:700;color:var(--red);text-align:center;margin-top:0.5rem;}
 
-    /* ADMIN DASHBOARD */
-    #screenAdmin{padding:0; display:none; flex-direction:column; min-height:100vh; align-items:stretch;}
-    #screenAdmin.active{display:flex;}
-
-    .admin-topbar{
-      background:rgba(6,11,24,0.95); backdrop-filter:blur(12px);
-      border-bottom:1px solid var(--border);
-      padding:1rem 2rem; display:flex;
-      align-items:center; justify-content:space-between;
-      position:sticky; top:0; z-index:10;
-    }
-    .admin-logo{font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:1.2rem; letter-spacing:0.06em;}
+    /* TOPBAR */
+    .admin-topbar{background:rgba(6,11,24,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+    .admin-logo{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:1.2rem;letter-spacing:0.06em;}
     .admin-logo span{color:var(--blue2);}
-    .admin-tag{
-      background:rgba(37,99,235,0.15); border:1px solid rgba(37,99,235,0.3);
-      color:var(--blue2); font:700 0.72rem 'Nunito',sans-serif;
-      letter-spacing:0.15em; text-transform:uppercase;
-      padding:0.3rem 0.75rem; border-radius:6px;
-    }
+    .admin-tag{background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);color:var(--blue2);font:700 0.72rem 'Nunito',sans-serif;letter-spacing:0.15em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:6px;}
 
-    .admin-body{max-width:780px;margin:0 auto;padding:2.5rem 1.5rem;width:100%;}
+    /* BODY */
+    .admin-body{max-width:820px;margin:0 auto;padding:2.5rem 1.5rem 5rem;width:100%;animation:fadeIn 0.4s ease both;}
+    .section-head{font-size:0.7rem;font-weight:800;color:var(--dim);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:1.25rem;padding-bottom:0.625rem;border-bottom:1px solid var(--border);}
+    .admin-section{margin-bottom:3rem;}
 
-    .admin-section{margin-bottom:2.5rem;}
-    .section-head{
-      font-size:0.7rem; font-weight:800; color:var(--dim);
-      letter-spacing:0.3em; text-transform:uppercase;
-      margin-bottom:1.25rem; padding-bottom:0.625rem;
-      border-bottom:1px solid var(--border);
-    }
+    /* FIELD */
+    .field-group{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.75rem;margin-bottom:1rem;}
+    .field-lbl{font-size:0.72rem;color:var(--dim);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:0.5rem;}
+    .field-hint{font-size:0.75rem;color:var(--dim);margin-bottom:0.75rem;line-height:1.5;}
+    .field-row{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;}
+    .field-inp{flex:1;min-width:200px;padding:0.8rem 1rem;background:var(--bg3);border:1.5px solid var(--border);border-radius:10px;color:var(--white);font:600 0.9rem 'Nunito',sans-serif;outline:none;transition:var(--tr);}
+    .field-inp:focus{border-color:var(--blue2);box-shadow:0 0 0 3px var(--glow);}
+    .field-ta{width:100%;padding:0.8rem 1rem;background:var(--bg3);border:1.5px solid var(--border);border-radius:10px;color:var(--white);font:400 0.875rem 'Nunito',sans-serif;line-height:1.6;resize:vertical;min-height:72px;outline:none;transition:var(--tr);margin-top:0.5rem;}
+    .field-ta:focus{border-color:var(--blue2);box-shadow:0 0 0 3px var(--glow);}
+
+    /* BUTTONS */
+    .save-btn{padding:0.7rem 1.5rem;background:var(--blue);color:var(--white);border:none;border-radius:10px;font:800 0.88rem 'Nunito',sans-serif;cursor:pointer;transition:var(--tr);white-space:nowrap;}
+    .save-btn:hover{background:var(--blue2);transform:translateY(-1px);}
+    .save-btn.full{width:100%;padding:0.875rem;}
+    .del-btn{padding:0.5rem 0.875rem;background:rgba(239,68,68,0.12);color:var(--red);border:1px solid rgba(239,68,68,0.3);border-radius:8px;font:700 0.78rem 'Nunito',sans-serif;cursor:pointer;transition:var(--tr);white-space:nowrap;}
+    .del-btn:hover{background:rgba(239,68,68,0.22);}
+    .add-tier-btn{width:100%;padding:1rem;background:transparent;color:var(--blue2);border:2px dashed rgba(59,130,246,0.35);border-radius:14px;font:800 0.95rem 'Nunito',sans-serif;cursor:pointer;transition:var(--tr);margin-top:0.5rem;}
+    .add-tier-btn:hover{border-color:var(--blue2);background:rgba(37,99,235,0.06);}
+    .ok-badge{display:inline-block;margin-left:0.75rem;color:var(--green);font-size:0.8rem;font-weight:700;opacity:0;transition:opacity 0.3s;}
+    .ok-badge.show{opacity:1;}
+
+    /* TIER CARDS */
+    .tier-edit-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;margin-bottom:0.875rem;overflow:hidden;}
+    .tier-edit-head{display:flex;align-items:center;gap:0.75rem;padding:1rem 1.25rem;cursor:pointer;user-select:none;transition:background 0.2s;}
+    .tier-edit-head:hover{background:rgba(255,255,255,0.03);}
+    .tier-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+    .tier-head-name{font-weight:900;font-size:1rem;flex:1;}
+    .tier-head-price{color:var(--dim);font-size:0.85rem;}
+    .tier-sale-badge{font-size:0.7rem;font-weight:800;padding:0.2rem 0.6rem;border-radius:6px;letter-spacing:0.08em;}
+    .tier-sale-badge.on{background:rgba(34,197,94,0.15);color:#22c55e;}
+    .tier-sale-badge.off{background:rgba(239,68,68,0.15);color:#ef4444;}
+    .tier-arrow{color:var(--dim);font-size:0.85rem;transition:transform 0.25s;}
+    .tier-arrow.open{transform:rotate(180deg);}
+    .tier-edit-body{display:none;padding:0 1.25rem 1.25rem;border-top:1px solid var(--border);}
+    .tier-edit-body.open{display:block;}
+    .tier-field-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1rem;}
+    @media(max-width:500px){.tier-field-grid{grid-template-columns:1fr;}}
+    .tf-label{font-size:0.7rem;color:var(--dim);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.35rem;}
+    .tf-inp{width:100%;padding:0.7rem 0.875rem;background:var(--bg3);border:1.5px solid var(--border);border-radius:9px;color:var(--white);font:600 0.875rem 'Nunito',sans-serif;outline:none;transition:var(--tr);}
+    .tf-inp:focus{border-color:var(--blue2);box-shadow:0 0 0 3px var(--glow);}
+
+    /* COLOR PICKER ROW */
+    .color-row{display:flex;align-items:center;gap:0.5rem;}
+    .color-swatch{width:36px;height:36px;border-radius:8px;border:2px solid var(--border);cursor:pointer;flex-shrink:0;padding:0;background:none;overflow:hidden;}
+    .color-swatch input[type=color]{width:100%;height:100%;border:none;padding:0;cursor:pointer;background:none;appearance:none;-webkit-appearance:none;}
+    .color-hex{flex:1;padding:0.6rem 0.75rem;background:var(--bg3);border:1.5px solid var(--border);border-radius:9px;color:var(--white);font:600 0.85rem 'Courier New',monospace;outline:none;transition:var(--tr);width:100px;}
+    .color-hex:focus{border-color:var(--blue2);}
 
     /* TOGGLE */
-    .toggle-row{
-      background:var(--bg2); border:1px solid var(--border);
-      border-radius:14px; padding:1.5rem 1.75rem;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:1rem;
-    }
-    .toggle-info{}
-    .toggle-label{font-size:1rem;font-weight:800;margin-bottom:0.25rem;}
-    .toggle-desc{color:var(--dim);font-size:0.82rem;line-height:1.5;}
-    .toggle-status{
-      font:800 0.8rem 'Nunito',sans-serif;
-      padding:0.3rem 0.75rem; border-radius:8px;
-      margin-top:0.5rem; display:inline-block;
-    }
-    .toggle-status.on{background:rgba(34,197,94,0.15);color:#22c55e;}
-    .toggle-status.off{background:rgba(239,68,68,0.15);color:#ef4444;}
-
-    .switch{
-      position:relative; width:56px; height:30px; flex-shrink:0;
-    }
+    .tog-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1rem;}
+    .tog-lbl{font-size:0.875rem;font-weight:700;color:var(--off);}
+    .switch{position:relative;width:50px;height:27px;flex-shrink:0;}
     .switch input{opacity:0;width:0;height:0;}
-    .slider{
-      position:absolute; cursor:pointer; inset:0;
-      background:#1a2540; border-radius:30px;
-      transition:0.35s; border:1.5px solid var(--border);
-    }
-    .slider::before{
-      content:''; position:absolute;
-      width:22px; height:22px; left:3px; bottom:3px;
-      background:#475569; border-radius:50%; transition:0.35s;
-    }
-    .switch input:checked + .slider{background:rgba(37,99,235,0.3);border-color:var(--blue);}
-    .switch input:checked + .slider::before{transform:translateX(26px);background:var(--blue2);}
+    .slider{position:absolute;cursor:pointer;inset:0;background:#1a2540;border-radius:30px;transition:0.35s;border:1.5px solid var(--border);}
+    .slider::before{content:'';position:absolute;width:19px;height:19px;left:3px;bottom:3px;background:#475569;border-radius:50%;transition:0.35s;}
+    .switch input:checked+.slider{background:rgba(37,99,235,0.3);border-color:var(--blue);}
+    .switch input:checked+.slider::before{transform:translateX(23px);background:var(--blue2);}
 
-    /* INPUT FIELDS */
-    .field-group{
-      background:var(--bg2); border:1px solid var(--border);
-      border-radius:14px; padding:1.5rem 1.75rem;
-      margin-bottom:1rem;
-    }
-    .field-lbl{font-size:0.72rem;color:var(--dim);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:0.5rem;}
-    .field-inp{
-      width:100%; padding:0.8rem 1rem;
-      background:var(--bg3); border:1.5px solid var(--border);
-      border-radius:10px; color:var(--white);
-      font:600 0.9rem 'Nunito',sans-serif;
-      outline:none; transition:var(--tr);
-      margin-bottom:0.75rem;
-    }
-    .field-inp:focus{border-color:var(--blue2);box-shadow:0 0 0 3px var(--glow);}
-    .field-hint{font-size:0.75rem;color:var(--dim);margin-bottom:0.875rem;line-height:1.5;}
-    .save-btn{
-      padding:0.7rem 1.5rem;
-      background:var(--blue); color:var(--white);
-      border:none; border-radius:10px;
-      font:800 0.88rem 'Nunito',sans-serif;
-      cursor:pointer; transition:var(--tr);
-    }
-    .save-btn:hover{background:var(--blue2);transform:translateY(-1px);}
-    .save-ok{
-      display:inline-block; margin-left:0.75rem;
-      color:var(--green); font-size:0.8rem; font-weight:700;
-      opacity:0; transition:opacity 0.3s;
-    }
-    .save-ok.show{opacity:1;}
+    /* JSON OUTPUT */
+    .json-box{background:#010816;border:1px solid var(--border);border-radius:12px;padding:1.25rem;font:400 0.8rem 'Courier New',monospace;color:#7dd3fc;line-height:1.6;max-height:300px;overflow-y:auto;white-space:pre;word-break:break-all;margin-bottom:1rem;}
+    .copy-json-btn{width:100%;padding:0.875rem;background:var(--green);color:#000;border:none;border-radius:10px;font:800 0.95rem 'Nunito',sans-serif;cursor:pointer;transition:var(--tr);}
+    .copy-json-btn:hover{filter:brightness(1.08);transform:translateY(-1px);}
 
-    /* DESCRIPTIONS */
-    .desc-group{
-      background:var(--bg2); border:1px solid var(--border);
-      border-radius:14px; padding:1.25rem 1.5rem;
-      margin-bottom:0.875rem;
-    }
-    .desc-tier-name{font-size:0.88rem;font-weight:900;margin-bottom:0.5rem;}
-    .desc-textarea{
-      width:100%; padding:0.75rem 1rem;
-      background:var(--bg3); border:1.5px solid var(--border);
-      border-radius:10px; color:var(--white);
-      font:400 0.85rem 'Nunito',sans-serif;
-      line-height:1.6; resize:vertical; min-height:80px;
-      outline:none; transition:var(--tr);
-      margin-bottom:0.625rem;
-    }
-    .desc-textarea:focus{border-color:var(--blue2);box-shadow:0 0 0 3px var(--glow);}
-    .save-desc-btn{
-      padding:0.55rem 1.1rem;
-      background:var(--bg3); color:var(--dim);
-      border:1px solid var(--border); border-radius:8px;
-      font:700 0.8rem 'Nunito',sans-serif;
-      cursor:pointer; transition:var(--tr);
-    }
-    .save-desc-btn:hover{border-color:var(--blue2);color:var(--white);}
-
-    /* SCROLLBAR */
-    ::-webkit-scrollbar{width:5px;}
-    ::-webkit-scrollbar-track{background:var(--bg);}
-    ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px;}
-
-    /* KEYFRAMES */
-    @keyframes shake{
-      0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)}
-      40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)}
-    }
-    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-    .admin-body{animation:fadeIn 0.4s ease both;}
+    /* APPLY STEPS */
+    .apply-steps{background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.25);border-radius:14px;padding:1.5rem;margin-top:1rem;}
+    .apply-steps h4{font-size:0.85rem;font-weight:900;margin-bottom:1rem;color:var(--blue2);}
+    .apply-step{display:flex;gap:0.75rem;margin-bottom:0.75rem;font-size:0.85rem;line-height:1.55;}
+    .apply-step:last-child{margin-bottom:0;}
+    .step-num{background:var(--blue);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 0.7rem 'Nunito',sans-serif;flex-shrink:0;margin-top:0.1rem;}
+    .apply-step a{color:var(--blue2);}
+    code{background:var(--bg3);padding:0.1rem 0.4rem;border-radius:4px;font-family:'Courier New',monospace;font-size:0.82em;}
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════
-     SCREEN 1 — FIRST CODE
-═══════════════════════════════════════ -->
+<!-- SCREEN 1 -->
 <div class="screen active" id="screen1">
   <div class="code-card">
     <span class="code-icon">🔐</span>
     <div class="code-title">Admin Access</div>
-    <div class="code-sub">Enter your first access code to continue.</div>
+    <div class="code-sub">Enter your first access code.</div>
     <div class="code-lbl">Access Code 1</div>
-    <input class="code-inp" id="c1inp" type="password"
-           placeholder="Enter code..." autocomplete="off" spellcheck="false">
+    <input class="code-inp" id="c1inp" type="password" placeholder="Enter code..." autocomplete="off" spellcheck="false">
     <button class="code-btn" onclick="checkCode1()">Continue →</button>
     <div class="code-err" id="c1err"></div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     SCREEN 2 — SECOND CODE
-═══════════════════════════════════════ -->
+<!-- SCREEN 2 -->
 <div class="screen" id="screen2">
   <div class="code-card">
     <span class="code-icon">🛡️</span>
     <div class="code-title">Verification</div>
-    <div class="code-sub">One more step — enter your second code.</div>
+    <div class="code-sub">One more step.</div>
     <div class="code-lbl">Access Code 2</div>
-    <input class="code-inp" id="c2inp" type="password"
-           placeholder="Enter code..." autocomplete="off" spellcheck="false">
+    <input class="code-inp" id="c2inp" type="password" placeholder="Enter code..." autocomplete="off" spellcheck="false">
     <button class="code-btn" onclick="checkCode2()">Enter Admin →</button>
     <div class="code-err" id="c2err"></div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     SCREEN 3 — ADMIN DASHBOARD
-═══════════════════════════════════════ -->
+<!-- ADMIN DASHBOARD -->
 <div id="screenAdmin">
   <div class="admin-topbar">
-    <div class="admin-logo">REMS <span>CRIB</span> Admin</div>
-    <div class="admin-tag">⚙️ Control Panel</div>
+    <div class="admin-logo">REM'S <span>CRIB</span> Admin</div>
+    <div class="admin-tag">⚙️ Config Editor</div>
   </div>
 
   <div class="admin-body">
 
-    <!-- ─── TIER 6 TOGGLE ─── -->
+    <!-- LINKS -->
     <div class="admin-section">
-      <div class="section-head">Tier 6 Sale Status</div>
-      <div class="toggle-row">
-        <div class="toggle-info">
-          <div class="toggle-label">Tier 6 — LIMITED EDITION</div>
-          <div class="toggle-desc">Toggle whether Tier 6 is available for purchase. When OFF, the card is greyed out and the buy button is disabled on the store.</div>
-          <div class="toggle-status" id="t6StatusLabel">● ON SALE</div>
-        </div>
-        <label class="switch">
-          <input type="checkbox" id="t6Toggle" onchange="saveT6()">
-          <span class="slider"></span>
-        </label>
-      </div>
-    </div>
-
-    <!-- ─── LINKS ─── -->
-    <div class="admin-section">
-      <div class="section-head">Redirect Links</div>
-
+      <div class="section-head">Site Links</div>
       <div class="field-group">
         <div class="field-lbl">Discord Invite URL</div>
-        <div class="field-hint">This applies to every Discord button on the entire site.</div>
-        <input class="field-inp" id="discordInp" type="url" placeholder="https://discord.gg/...">
-        <button class="save-btn" onclick="saveDiscord()">Save</button>
-        <span class="save-ok" id="discordOk">✓ Saved</span>
+        <div class="field-hint">Updates every Discord button on the entire site for all visitors.</div>
+        <div class="field-row">
+          <input class="field-inp" id="cfgDiscord" type="url" placeholder="https://discord.gg/...">
+        </div>
       </div>
-
       <div class="field-group">
         <div class="field-lbl">Telegram URL</div>
-        <div class="field-hint">This applies to every Telegram button on the entire site.</div>
-        <input class="field-inp" id="telegramInp" type="text" placeholder="https://t.me/yourusername">
-        <button class="save-btn" onclick="saveTelegram()">Save</button>
-        <span class="save-ok" id="telegramOk">✓ Saved</span>
+        <div class="field-hint">Updates every Telegram button on the entire site for all visitors.</div>
+        <div class="field-row">
+          <input class="field-inp" id="cfgTelegram" type="text" placeholder="https://t.me/username">
+        </div>
       </div>
     </div>
 
-    <!-- ─── DESCRIPTIONS ─── -->
+    <!-- TIERS -->
     <div class="admin-section">
-      <div class="section-head">Tier Descriptions</div>
-      <div id="descList"></div>
-      <button class="save-btn" onclick="saveAllDescs()" style="width:100%;padding:0.875rem;">
-        Save All Descriptions
-      </button>
-      <span class="save-ok" id="descOk" style="display:block;text-align:center;margin-top:0.5rem;">✓ Saved</span>
+      <div class="section-head">Tiers</div>
+      <div id="tierEditorList"></div>
+      <button class="add-tier-btn" onclick="addNewTier()">+ Add New Tier</button>
+    </div>
+
+    <!-- GENERATE -->
+    <div class="admin-section">
+      <div class="section-head">Generate & Apply</div>
+      <button class="save-btn full" onclick="generateConfig()" style="margin-bottom:1rem;">⚡ Generate Config JSON</button>
+      <div id="jsonOutput" style="display:none;">
+        <div class="json-box" id="jsonBox"></div>
+        <button class="copy-json-btn" id="copyJsonBtn" onclick="copyJson()">📋 Copy JSON</button>
+
+        <div class="apply-steps">
+          <h4>How to apply (takes ~30 seconds)</h4>
+          <div class="apply-step">
+            <div class="step-num">1</div>
+            <div>Click <strong>Copy JSON</strong> above</div>
+          </div>
+          <div class="apply-step">
+            <div class="step-num">2</div>
+            <div>Go to <a href="https://github.com/XRZPLR/rems-crib-" target="_blank">github.com/XRZPLR/rems-crib-</a></div>
+          </div>
+          <div class="apply-step">
+            <div class="step-num">3</div>
+            <div>Click on <code>config.json</code></div>
+          </div>
+          <div class="apply-step">
+            <div class="step-num">4</div>
+            <div>Click the pencil ✏️ icon (top right of the file)</div>
+          </div>
+          <div class="apply-step">
+            <div class="step-num">5</div>
+            <div>Select all (<code>Ctrl+A</code>) and paste your copied JSON</div>
+          </div>
+          <div class="apply-step">
+            <div class="step-num">6</div>
+            <div>Click <strong>Commit changes</strong> — Netlify auto-deploys in ~30 seconds ✅</div>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
 </div>
 
 <script>
-// ═══════════ CODES (owner-only knowledge) ═══════════
+// ═══ AUTH ═══
 const C1 = 'ASFUH SDF8F DF98G 9DF8BDFI8 DFBIH0 DFG98389 WEFJ';
 const C2 = 'SECOND 23RF DWEF';
 let c1Passed = false;
@@ -300,43 +239,29 @@ function showScreen(id) {
   const admin = document.getElementById('screenAdmin');
   if (id === 'admin') {
     admin.classList.add('active');
-    loadAdminValues();
+    loadCurrentConfig();
   } else {
     admin.classList.remove('active');
     document.getElementById(id).classList.add('active');
   }
 }
-
 function checkCode1() {
   const v = document.getElementById('c1inp').value;
-  if (v === C1) {
-    c1Passed = true;
-    showScreen('screen2');
-    document.getElementById('c2inp').focus();
-  } else {
-    const inp = document.getElementById('c1inp');
-    inp.classList.add('bad');
-    document.getElementById('c1err').textContent = 'Incorrect code.';
-    inp.value = '';
-    setTimeout(() => inp.classList.remove('bad'), 450);
-  }
+  if (v === C1) { c1Passed = true; showScreen('screen2'); document.getElementById('c2inp').focus(); }
+  else { shake('c1inp', 'c1err'); }
 }
-
 function checkCode2() {
   if (!c1Passed) { showScreen('screen1'); return; }
   const v = document.getElementById('c2inp').value;
-  if (v === C2) {
-    showScreen('admin');
-  } else {
-    const inp = document.getElementById('c2inp');
-    inp.classList.add('bad');
-    document.getElementById('c2err').textContent = 'Incorrect code.';
-    inp.value = '';
-    setTimeout(() => inp.classList.remove('bad'), 450);
-  }
+  if (v === C2) { showScreen('admin'); }
+  else { shake('c2inp', 'c2err'); }
 }
-
-// Enter key support
+function shake(inpId, errId) {
+  const inp = document.getElementById(inpId);
+  inp.classList.add('bad'); inp.value = '';
+  document.getElementById(errId).textContent = 'Incorrect code.';
+  setTimeout(() => inp.classList.remove('bad'), 450);
+}
 ['c1inp','c2inp'].forEach((id,i) => {
   document.getElementById(id).addEventListener('keydown', e => {
     if (e.key === 'Enter') i === 0 ? checkCode1() : checkCode2();
@@ -344,100 +269,254 @@ function checkCode2() {
   });
 });
 
-// ═══════════ ADMIN VALUES ═══════════
-const DEFAULTS = {
-  discord:'https://discord.gg/aj8Rep3n4V',
-  telegram:'https://t.me/remscrib',
-  tier6_sale: true,
-  descs: {
-    access: "Full server access — chat, exclusive channels, and Tier 1 content. Your gateway into Rem's Crib.",
-    tier1: "Same as Access — your entry into the Crib. Tier 1 content plus full server access.",
-    tier2: "Everything in Tier 1, plus a bigger selection of videos and exclusive content.",
-    tier3: "Everything in Tier 2, plus an even larger collection. Seriously good stuff.",
-    tier4: "Everything in Tier 3, times 4. Over four times the content. A serious archive.",
-    tier5: "Everything in Tier 4, times 13. The full vault. This is it.",
-    tier6: "LIMITED EDITION. Rarer than rare. Beyond everything else — the complete collection. Cannot be earned with invites."
+// ═══ LOAD CONFIG ═══
+let currentCfg = null;
+
+async function loadCurrentConfig() {
+  try {
+    const res = await fetch('/config.json?' + Date.now());
+    currentCfg = await res.json();
+  } catch(e) {
+    currentCfg = { discord:'', telegram:'', tiers:[] };
   }
-};
+  populateForm();
+}
 
-const TIER_LABELS = {
-  access:'ACCESS', tier1:'TIER 1', tier2:'TIER 2',
-  tier3:'TIER 3', tier4:'TIER 4', tier5:'TIER 5', tier6:'TIER 6 — LIMITED'
-};
+function populateForm() {
+  document.getElementById('cfgDiscord').value  = currentCfg.discord || '';
+  document.getElementById('cfgTelegram').value = currentCfg.telegram || '';
+  renderTierEditors(currentCfg.tiers || []);
+}
 
-function loadAdminValues() {
-  // Discord
-  document.getElementById('discordInp').value =
-    localStorage.getItem('rc_discord') || DEFAULTS.discord;
+// ═══ TIER EDITORS ═══
+let tierData = [];
 
-  // Telegram
-  document.getElementById('telegramInp').value =
-    localStorage.getItem('rc_telegram') || DEFAULTS.telegram;
+function renderTierEditors(tiers) {
+  tierData = JSON.parse(JSON.stringify(tiers));
+  const list = document.getElementById('tierEditorList');
+  list.innerHTML = '';
+  tierData.forEach((t, i) => {
+    list.insertAdjacentHTML('beforeend', buildTierEditor(t, i));
+    syncColorInputs(i);
+  });
+}
 
-  // Tier 6 toggle
-  const t6 = localStorage.getItem('rc_tier6_sale');
-  const onSale = t6 === null ? true : t6 === 'true';
-  document.getElementById('t6Toggle').checked = onSale;
-  updateT6Label(onSale);
+function buildTierEditor(t, i) {
+  const onSaleChecked = t.onSale !== false ? 'checked' : '';
+  const hasInvChecked = t.hasInvites ? 'checked' : '';
+  const boostChecked  = t.hasBoost ? 'checked' : '';
+  const limitChecked  = t.limited ? 'checked' : '';
+  const isAccChecked  = t.isAccess ? 'checked' : '';
+  const bc = t.borderColor || '#2563eb';
+  const pc = t.priceColor  || '#3b82f6';
+  const lc = t.labelColor  || '#7a8fa8';
 
-  // Descriptions
-  let descs;
-  try { descs = JSON.parse(localStorage.getItem('rc_descs') || '{}'); }
-  catch(e) { descs = {}; }
-
-  const container = document.getElementById('descList');
-  container.innerHTML = '';
-  Object.keys(TIER_LABELS).forEach(id => {
-    const val = descs[id] || DEFAULTS.descs[id] || '';
-    container.innerHTML += `
-      <div class="desc-group">
-        <div class="desc-tier-name">${TIER_LABELS[id]}</div>
-        <textarea class="desc-textarea" id="descTA_${id}" rows="3">${val}</textarea>
+  return `
+  <div class="tier-edit-card" id="tecard_${i}">
+    <div class="tier-edit-head" onclick="toggleTierEditor(${i})">
+      <div class="tier-dot" style="background:${bc}" id="teDot_${i}"></div>
+      <div class="tier-head-name" id="teHeadName_${i}">${t.name}</div>
+      <div class="tier-head-price" id="teHeadPrice_${i}">${t.price}</div>
+      <div class="tier-sale-badge ${t.onSale !== false ? 'on' : 'off'}" id="teSaleBadge_${i}">${t.onSale !== false ? '● ON SALE' : '● OFF SALE'}</div>
+      <span class="tier-arrow" id="teArrow_${i}">▼</span>
+    </div>
+    <div class="tier-edit-body" id="tbody_${i}">
+      <div class="tier-field-grid">
+        <div>
+          <div class="tf-label">Tier Name</div>
+          <input class="tf-inp" id="teName_${i}" value="${t.name}" oninput="updateHead(${i})">
+        </div>
+        <div>
+          <div class="tf-label">Price</div>
+          <input class="tf-inp" id="tePrice_${i}" value="${t.price}" oninput="updateHead(${i})">
+        </div>
+        <div>
+          <div class="tf-label">Card Label</div>
+          <input class="tf-inp" id="teLabel_${i}" value="${t.label || ''}">
+        </div>
+        <div>
+          <div class="tf-label">Invite Count</div>
+          <input class="tf-inp" id="teInvCount_${i}" type="number" value="${t.invites || 0}">
+        </div>
       </div>
-    `;
+
+      <div style="margin-top:1rem;">
+        <div class="tf-label" style="margin-bottom:0.4rem;">Description</div>
+        <textarea class="field-ta" id="teDesc_${i}">${t.description || ''}</textarea>
+      </div>
+
+      <div style="margin-top:1rem;">
+        <div class="tf-label" style="margin-bottom:0.4rem;">Invite Message</div>
+        <textarea class="field-ta" id="teInvMsg_${i}" style="min-height:56px;">${t.inviteMsg || ''}</textarea>
+      </div>
+
+      <div class="tier-field-grid" style="margin-top:1rem;">
+        <div>
+          <div class="tf-label">Border Color</div>
+          <div class="color-row">
+            <label class="color-swatch"><input type="color" id="teBorderPicker_${i}" value="${bc}" oninput="syncHex(${i},'Border')"></label>
+            <input class="color-hex" id="teBorderHex_${i}" value="${bc}" maxlength="7" oninput="syncPicker(${i},'Border')">
+          </div>
+        </div>
+        <div>
+          <div class="tf-label">Price Color</div>
+          <div class="color-row">
+            <label class="color-swatch"><input type="color" id="tePricePicker_${i}" value="${pc}" oninput="syncHex(${i},'Price')"></label>
+            <input class="color-hex" id="tePriceHex_${i}" value="${pc}" maxlength="7" oninput="syncPicker(${i},'Price')">
+          </div>
+        </div>
+        <div>
+          <div class="tf-label">Label Color</div>
+          <div class="color-row">
+            <label class="color-swatch"><input type="color" id="teLabelPicker_${i}" value="${lc}" oninput="syncHex(${i},'Label')"></label>
+            <input class="color-hex" id="teLabelHex_${i}" value="${lc}" maxlength="7" oninput="syncPicker(${i},'Label')">
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:0.5rem;">
+        <div class="tog-row"><span class="tog-lbl">On Sale</span><label class="switch"><input type="checkbox" id="teSale_${i}" ${onSaleChecked} onchange="updateSaleBadge(${i})"><span class="slider"></span></label></div>
+        <div class="tog-row"><span class="tog-lbl">Has Invite Option</span><label class="switch"><input type="checkbox" id="teHasInv_${i}" ${hasInvChecked}><span class="slider"></span></label></div>
+        <div class="tog-row"><span class="tog-lbl">Has Boost Option</span><label class="switch"><input type="checkbox" id="teBoost_${i}" ${boostChecked}><span class="slider"></span></label></div>
+        <div class="tog-row"><span class="tog-lbl">Limited Edition</span><label class="switch"><input type="checkbox" id="teLimit_${i}" ${limitChecked}><span class="slider"></span></label></div>
+        <div class="tog-row"><span class="tog-lbl">Featured (Full-width Access card)</span><label class="switch"><input type="checkbox" id="teIsAcc_${i}" ${isAccChecked}><span class="slider"></span></label></div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;margin-top:1.25rem;">
+        <button class="del-btn" onclick="deleteTier(${i})">🗑 Remove Tier</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function syncColorInputs(i) {
+  ['Border','Price','Label'].forEach(type => {
+    const picker = document.getElementById(`te${type}Picker_${i}`);
+    const hex    = document.getElementById(`te${type}Hex_${i}`);
+    if (picker && hex) {
+      picker.value = hex.value;
+      if (type === 'Border') updateDot(i, hex.value);
+    }
   });
 }
 
-function updateT6Label(onSale) {
-  const el = document.getElementById('t6StatusLabel');
-  if (onSale) {
-    el.textContent = '● ON SALE'; el.className = 'toggle-status on';
-  } else {
-    el.textContent = '● OFF SALE'; el.className = 'toggle-status off';
+function syncHex(i, type) {
+  const val = document.getElementById(`te${type}Picker_${i}`).value;
+  document.getElementById(`te${type}Hex_${i}`).value = val;
+  if (type === 'Border') updateDot(i, val);
+}
+function syncPicker(i, type) {
+  const val = document.getElementById(`te${type}Hex_${i}`).value;
+  if (/^#[0-9a-fA-F]{6}$/.test(val)) {
+    document.getElementById(`te${type}Picker_${i}`).value = val;
+    if (type === 'Border') updateDot(i, val);
   }
 }
-
-// ═══════════ SAVE FUNCTIONS ═══════════
-function saveT6() {
-  const onSale = document.getElementById('t6Toggle').checked;
-  localStorage.setItem('rc_tier6_sale', String(onSale));
-  updateT6Label(onSale);
+function updateDot(i, color) {
+  const dot = document.getElementById(`teDot_${i}`);
+  if (dot) dot.style.background = color;
+}
+function updateHead(i) {
+  const name  = document.getElementById(`teName_${i}`)?.value  || '';
+  const price = document.getElementById(`tePrice_${i}`)?.value || '';
+  const hn = document.getElementById(`teHeadName_${i}`);
+  const hp = document.getElementById(`teHeadPrice_${i}`);
+  if (hn) hn.textContent = name;
+  if (hp) hp.textContent = price;
+}
+function updateSaleBadge(i) {
+  const on  = document.getElementById(`teSale_${i}`)?.checked;
+  const el  = document.getElementById(`teSaleBadge_${i}`);
+  if (el) { el.textContent = on ? '● ON SALE' : '● OFF SALE'; el.className = `tier-sale-badge ${on ? 'on' : 'off'}`; }
+}
+function toggleTierEditor(i) {
+  const body  = document.getElementById(`tbody_${i}`);
+  const arrow = document.getElementById(`teArrow_${i}`);
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+function deleteTier(i) {
+  if (!confirm('Remove this tier?')) return;
+  const list = document.getElementById('tierEditorList');
+  list.removeChild(document.getElementById(`tecard_${i}`));
+  tierData.splice(i, 1);
+  renderTierEditors(tierData);
+}
+function addNewTier() {
+  const newTier = {
+    id: 'tier' + Date.now(),
+    name: 'NEW TIER',
+    price: '£0',
+    label: 'New',
+    description: 'Tier description here.',
+    borderColor: '#2563eb',
+    priceColor: '#3b82f6',
+    labelColor: '#7a8fa8',
+    isAccess: false,
+    invites: 0,
+    hasBoost: false,
+    hasInvites: false,
+    limited: false,
+    onSale: true,
+    inviteMsg: ''
+  };
+  tierData.push(newTier);
+  const list = document.getElementById('tierEditorList');
+  const i = tierData.length - 1;
+  list.insertAdjacentHTML('beforeend', buildTierEditor(newTier, i));
+  syncColorInputs(i);
+  toggleTierEditor(i);
+  document.getElementById(`teName_${i}`)?.scrollIntoView({ behavior:'smooth', block:'center' });
 }
 
-function flashOk(id) {
-  const el = document.getElementById(id);
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 2500);
-}
+// ═══ COLLECT FORM DATA ═══
+function collectConfig() {
+  const tiers = [];
+  const cards = document.querySelectorAll('[id^="tecard_"]');
 
-function saveDiscord() {
-  const v = document.getElementById('discordInp').value.trim();
-  if (v) { localStorage.setItem('rc_discord', v); flashOk('discordOk'); }
-}
-
-function saveTelegram() {
-  const v = document.getElementById('telegramInp').value.trim();
-  if (v) { localStorage.setItem('rc_telegram', v); flashOk('telegramOk'); }
-}
-
-function saveAllDescs() {
-  let descs = {};
-  Object.keys(TIER_LABELS).forEach(id => {
-    const ta = document.getElementById('descTA_' + id);
-    if (ta) descs[id] = ta.value.trim();
+  cards.forEach((card, i) => {
+    const idx = card.id.replace('tecard_', '');
+    tiers.push({
+      id: tierData[i]?.id || ('tier' + i),
+      name:         document.getElementById(`teName_${idx}`)?.value.trim() || '',
+      price:        document.getElementById(`tePrice_${idx}`)?.value.trim() || '',
+      label:        document.getElementById(`teLabel_${idx}`)?.value.trim() || '',
+      description:  document.getElementById(`teDesc_${idx}`)?.value.trim() || '',
+      borderColor:  document.getElementById(`teBorderHex_${idx}`)?.value || '#2563eb',
+      priceColor:   document.getElementById(`tePriceHex_${idx}`)?.value  || '#3b82f6',
+      labelColor:   document.getElementById(`teLabelHex_${idx}`)?.value  || '#7a8fa8',
+      isAccess:     document.getElementById(`teIsAcc_${idx}`)?.checked  || false,
+      invites:      parseInt(document.getElementById(`teInvCount_${idx}`)?.value) || 0,
+      hasBoost:     document.getElementById(`teBoost_${idx}`)?.checked  || false,
+      hasInvites:   document.getElementById(`teHasInv_${idx}`)?.checked || false,
+      limited:      document.getElementById(`teLimit_${idx}`)?.checked  || false,
+      onSale:       document.getElementById(`teSale_${idx}`)?.checked !== false,
+      inviteMsg:    document.getElementById(`teInvMsg_${idx}`)?.value.trim() || ''
+    });
   });
-  localStorage.setItem('rc_descs', JSON.stringify(descs));
-  flashOk('descOk');
+
+  return {
+    discord:  document.getElementById('cfgDiscord')?.value.trim()  || '',
+    telegram: document.getElementById('cfgTelegram')?.value.trim() || '',
+    tiers
+  };
+}
+
+function generateConfig() {
+  const cfg  = collectConfig();
+  const json = JSON.stringify(cfg, null, 2);
+  document.getElementById('jsonBox').textContent = json;
+  document.getElementById('jsonOutput').style.display = 'block';
+  document.getElementById('copyJsonBtn').textContent = '📋 Copy JSON';
+  document.getElementById('jsonOutput').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+async function copyJson() {
+  const txt = document.getElementById('jsonBox').textContent;
+  await navigator.clipboard.writeText(txt).catch(() => {});
+  const btn = document.getElementById('copyJsonBtn');
+  btn.textContent = '✅ Copied! Now paste it into config.json on GitHub';
+  setTimeout(() => btn.textContent = '📋 Copy JSON', 4000);
 }
 </script>
 </body>
