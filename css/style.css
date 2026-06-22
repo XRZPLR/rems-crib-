@@ -177,3 +177,27 @@ body {
 @keyframes shine {
   from{left:-100%} to{left:150%}
 }
+.premium-server-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #8B6914, #FFD700, #C9A227, #8B6914);
+  background-size: 250% auto;
+  color: #1a1000;
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  padding: 18px 52px;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 8px 32px rgba(201, 162, 39, 0.45);
+  transition: background-position 0.6s ease, transform 0.2s, box-shadow 0.2s;
+}
+
+.premium-server-btn:hover {
+  background-position: right center;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 44px rgba(201, 162, 39, 0.65);
+}

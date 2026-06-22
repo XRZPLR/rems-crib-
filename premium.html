@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premium Server — Rem's Crib</title>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A227;
+      --gold-light: #FFD700;
+      --gold-pale: #FFF8DC;
+      --gold-shimmer: #F7E98E;
+      --gold-dark: #8B6914;
+      --red: #D32F2F;
+      --text: #1a1000;
+      --text-muted: #6b5a2a;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(160deg, #fffef8 0%, #fff8e1 40%, #fffff8 70%, #fffbef 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── LOADING SCREEN ── */
+    #loading {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #0d0a00, #1f1500, #0d0a00);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      gap: 20px;
+      transition: opacity 0.5s ease;
+    }
+
+    #loading.fade-out { opacity: 0; pointer-events: none; }
+
+    .load-crown { font-size: 58px; animation: crownPulse 1.6s ease-in-out infinite; }
+
+    .load-text {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 22px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .load-bar {
+      width: 180px;
+      height: 2px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .load-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light), var(--gold-dark));
+      border-radius: 2px;
+      animation: loadfill 3.2s ease forwards;
+    }
+
+    @keyframes loadfill { from { width: 0; } to { width: 100%; } }
+    @keyframes crownPulse {
+      0%, 100% { transform: scale(1) translateY(0); opacity: 1; }
+      50% { transform: scale(1.08) translateY(-4px); opacity: 0.85; }
+    }
+
+    /* ── NAV ── */
+    .back-nav {
+      padding: 24px 36px 0;
+    }
+
+    .back-btn {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 15px;
+      color: var(--gold-dark);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: color 0.2s;
+    }
+
+    .back-btn:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 52px 32px 36px;
+      text-align: center;
+    }
+
+    .limited-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--red);
+      color: white;
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 7px 20px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 24px rgba(211, 47, 47, 0.45);
+      animation: badgePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { box-shadow: 0 4px 24px rgba(211, 47, 47, 0.45); }
+      50% { box-shadow: 0 4px 40px rgba(211, 47, 47, 0.75); }
+    }
+
+    .crown-icon {
+      font-size: 68px;
+      display: block;
+      margin-bottom: 14px;
+      filter: drop-shadow(0 6px 24px rgba(201, 162, 39, 0.55));
+      animation: crownFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes crownFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .hero-title {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: clamp(56px, 11vw, 100px);
+      line-height: 0.88;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #8B6914 0%, #FFD700 40%, #C9A227 65%, #8B6914 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 14px;
+    }
+
+    .hero-sub {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: clamp(15px, 3.5vw, 22px);
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+    }
+
+    .gold-divider {
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 52px;
+    }
+
+    /* ── PRICE CARD ── */
+    .price-section {
+      display: flex;
+      justify-content: center;
+      padding: 0 24px 64px;
+    }
+
+    .price-card {
+      background: linear-gradient(145deg, #181000, #241900, #181000);
+      border-radius: 22px;
+      padding: 52px 48px;
+      text-align: center;
+      max-width: 440px;
+      width: 100%;
+      border: 1px solid rgba(201, 162, 39, 0.35);
+      box-shadow:
+        0 24px 80px rgba(201, 162, 39, 0.18),
+        0 0 0 1px rgba(255, 215, 0, 0.08) inset;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    }
+
+    .price-card::after {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%; transform: translateX(-50%);
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(201,162,39,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .price-eyebrow {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 12px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      opacity: 0.8;
+    }
+
+    .price-amount {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 88px;
+      line-height: 1;
+      color: white;
+      margin-bottom: 6px;
+      position: relative;
+    }
+
+    .price-amount .currency {
+      font-size: 42px;
+      color: var(--gold-light);
+      vertical-align: top;
+      margin-top: 14px;
+      display: inline-block;
+    }
+
+    .price-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 1px;
+      margin-bottom: 36px;
+    }
+
+    .buy-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #8B6914, #FFD700, #C9A227, #8B6914);
+      background-size: 250% auto;
+      color: #1a1000;
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 22px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      padding: 18px 60px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-position 0.6s ease, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 32px rgba(201, 162, 39, 0.45);
+      font-weight: 900;
+    }
+
+    .buy-btn:hover {
+      background-position: right center;
+      transform: translateY(-3px);
+      box-shadow: 0 14px 44px rgba(201, 162, 39, 0.65);
+    }
+
+    .buy-btn:active { transform: translateY(0); }
+
+    /* ── SHIMMER DIVIDER ── */
+    .shimmer-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,162,39,0.6), rgba(255,215,0,0.8), rgba(201,162,39,0.6), transparent);
+      max-width: 700px;
+      margin: 0 auto 60px;
+    }
+
+    /* ── SECTION TITLES ── */
+    .section { padding: 0 24px 64px; max-width: 940px; margin: 0 auto; }
+
+    .section-title {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 38px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--gold-dark);
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    /* ── FEATURES GRID ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid rgba(201, 162, 39, 0.18);
+      border-radius: 16px;
+      padding: 24px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      box-shadow: 0 2px 16px rgba(201, 162, 39, 0.07);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 32px rgba(201, 162, 39, 0.16);
+      border-color: rgba(201, 162, 39, 0.4);
+    }
+
+    .feature-icon { font-size: 26px; flex-shrink: 0; margin-top: 1px; }
+
+    .feature-name {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 19px;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .feature-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+
+    /* ── COMPARE ── */
+    .compare-section { padding: 0 24px 64px; max-width: 760px; margin: 0 auto; }
+
+    .compare-card {
+      background: linear-gradient(145deg, #fffef5, #fff9e0, #fffdf5);
+      border: 2px solid rgba(201, 162, 39, 0.5);
+      border-radius: 20px;
+      padding: 36px 40px;
+      box-shadow: 0 8px 40px rgba(201, 162, 39, 0.12);
+    }
+
+    .compare-header {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+      margin-bottom: 6px;
+    }
+
+    .compare-col-label {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .compare-col-label.right { text-align: right; }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 56px 1fr;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.12);
+    }
+
+    .compare-row:last-child { border-bottom: none; }
+
+    .compare-premium {
+      color: var(--gold-dark);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .compare-x40 {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 20px;
+    }
+
+    .compare-vs {
+      text-align: center;
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: rgba(0,0,0,0.2);
+      text-transform: uppercase;
+    }
+
+    .compare-tier { color: #aaa; font-size: 13px; text-align: right; }
+
+    /* ── PAYMENT ── */
+    .payment-section { padding: 0 24px 80px; max-width: 640px; margin: 0 auto; text-align: center; }
+
+    .payment-card {
+      background: white;
+      border-radius: 18px;
+      padding: 40px 36px;
+      border: 1px solid rgba(201, 162, 39, 0.18);
+      box-shadow: 0 6px 36px rgba(0,0,0,0.05);
+      text-align: left;
+    }
+
+    .step-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+
+    .step-item { display: flex; align-items: flex-start; gap: 16px; }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 16px;
+      color: #1a1000;
+      flex-shrink: 0;
+    }
+
+    .step-text { font-size: 14px; color: var(--text-muted); line-height: 1.65; padding-top: 5px; }
+    .step-text strong { color: var(--text); }
+    .step-text a { color: var(--gold-dark); text-decoration: none; }
+    .step-text a:hover { color: var(--gold); }
+
+    /* ── BUY MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 24px;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal {
+      background: linear-gradient(145deg, #181000, #241900);
+      border: 1px solid rgba(201, 162, 39, 0.45);
+      border-radius: 22px;
+      padding: 44px 40px 36px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,215,0,0.07) inset;
+      animation: modalIn 0.25s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.94) translateY(10px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+      border-radius: 22px 22px 0 0;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.3);
+      font-size: 20px;
+      cursor: pointer;
+      transition: color 0.2s;
+      line-height: 1;
+    }
+
+    .modal-close:hover { color: white; }
+
+    .modal-crown { font-size: 44px; margin-bottom: 12px; }
+
+    .modal-title {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 34px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .modal-sub { font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 28px; }
+
+    .modal-links { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+
+    .modal-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201, 162, 39, 0.25);
+      border-radius: 12px;
+      padding: 16px 20px;
+      text-decoration: none;
+      color: white;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+
+    .modal-link:hover {
+      background: rgba(201, 162, 39, 0.1);
+      border-color: var(--gold);
+      transform: translateX(3px);
+    }
+
+    .modal-link-icon { font-size: 22px; flex-shrink: 0; }
+
+    .modal-rewarble {
+      color: var(--gold);
+      font-size: 13px;
+      text-decoration: none;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+
+    .modal-rewarble:hover { opacity: 1; }
+
+    .modal-note { font-size: 11px; color: rgba(255,255,255,0.2); margin-top: 14px; }
+
+    @media (max-width: 600px) {
+      .price-card { padding: 36px 24px; }
+      .price-amount { font-size: 72px; }
+      .buy-btn { padding: 16px 40px; font-size: 20px; }
+      .compare-card { padding: 28px 20px; }
+      .compare-vs { display: none; }
+      .compare-tier { text-align: left; }
+      .compare-row { grid-template-columns: 1fr 1fr; }
+      .modal { padding: 36px 24px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOADING SCREEN ── -->
+<div id="loading">
+  <div class="load-crown">👑</div>
+  <div class="load-text">Premium</div>
+  <div class="load-bar"><div class="load-bar-fill"></div></div>
+</div>
+
+<script>
+  // Auth check
+  if (!localStorage.getItem('rc_auth')) {
+    window.location.href = '/';
+  }
+  // Dismiss loading
+  setTimeout(() => {
+    const el = document.getElementById('loading');
+    el.classList.add('fade-out');
+    setTimeout(() => el.remove(), 500);
+  }, 3400);
+</script>
+
+<!-- ── BACK NAV ── -->
+<nav class="back-nav">
+  <a href="/" class="back-btn">← Rem's Crib</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="limited-badge">🔥 Limited Offer</div>
+  <span class="crown-icon">👑</span>
+  <h1 class="hero-title">Premium<br>Server</h1>
+  <p class="hero-sub">The Ultimate Access Pass</p>
+  <div class="gold-divider"></div>
+</section>
+
+<!-- ── PRICE CARD ── -->
+<div class="price-section">
+  <div class="price-card">
+    <p class="price-eyebrow">One-Time Payment</p>
+    <div class="price-amount"><span class="currency">£</span>85</div>
+    <p class="price-note">Permanent Access &nbsp;·&nbsp; No Recurring Fees</p>
+    <button class="buy-btn" onclick="openModal()">Buy Now</button>
+  </div>
+</div>
+
+<div class="shimmer-line"></div>
+
+<!-- ── FEATURES ── -->
+<section class="section">
+  <h2 class="section-title">What's Inside</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">🌐</span>
+      <div>
+        <div class="feature-name">Websites</div>
+        <div class="feature-desc">Full collection of premium website templates and resources — yours to keep at no extra cost.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔗</span>
+      <div>
+        <div class="feature-name">Mega Links</div>
+        <div class="feature-desc">Exclusive Mega links packed with massive content libraries — delivered direct, no extra purchase.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🤖</span>
+      <div>
+        <div class="feature-name">Bots</div>
+        <div class="feature-desc">Discord bots and tools ready to deploy — included free inside the server.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📦</span>
+      <div>
+        <div class="feature-name">All Content</div>
+        <div class="feature-desc">Every digital file, resource and drop inside the server — included, always, at no extra cost.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💎</span>
+      <div>
+        <div class="feature-name">Premium Role</div>
+        <div class="feature-desc">Exclusive Premium role in the main Discord server. Stand apart from everyone else.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <div>
+        <div class="feature-name">Priority Support</div>
+        <div class="feature-desc">Your requests come first — faster responses and dedicated help, every time.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔄</span>
+      <div>
+        <div class="feature-name">Frequent Updates</div>
+        <div class="feature-desc">New content and resources added regularly — your server keeps growing automatically.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">♾️</span>
+      <div>
+        <div class="feature-name">Permanent Access</div>
+        <div class="feature-desc">One payment. No subscriptions. No renewals. Lifetime access, full stop.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="shimmer-line"></div>
+
+<!-- ── COMPARE ── -->
+<section class="compare-section">
+  <h2 class="section-title">vs Tier 5</h2>
+  <div class="compare-card">
+    <div class="compare-header">
+      <div class="compare-col-label">Premium Server</div>
+      <div></div>
+      <div class="compare-col-label right">Tier 5</div>
+    </div>
+    <div class="compare-row">
+      <div><span class="compare-x40">×40</span> <span class="compare-premium">More Content</span></div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-tier">Standard content</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-premium">✓ Websites Included</div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-tier">Not included</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-premium">✓ Permanent Access</div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-tier">Tier access only</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-premium">✓ Premium Server Role</div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-tier">No role</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-premium">✓ Priority Support</div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-tier">Standard support</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-premium">✓ Frequent Updates</div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-tier">No updates</div>
+    </div>
+  </div>
+</section>
+
+<div class="shimmer-line"></div>
+
+<!-- ── PAYMENT INFO ── -->
+<section class="payment-section">
+  <h2 class="section-title">How to Pay</h2>
+  <div class="payment-card">
+    <ol class="step-list">
+      <li class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-text">Head to <strong><a id="rewarble-link" href="#" target="_blank">Rewarble</a></strong> and purchase a <strong>PayPal GBP Gift Card for £85</strong></div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-text">Click <strong>Buy Now</strong> above and DM us on <strong>Discord or Telegram</strong> with your gift card code</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-text">We'll verify your payment and send you the <strong>Premium Server invite</strong> — usually within minutes</div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ── BUY MODAL ── -->
+<div class="modal-overlay" id="buyModal" onclick="closeModalOnOverlay(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-crown">👑</div>
+    <div class="modal-title">Buy Premium</div>
+    <div class="modal-sub">DM us with your £85 Rewarble PayPal gift card code</div>
+    <div class="modal-links">
+      <a class="modal-link" id="discord-link" href="#" target="_blank">
+        <span class="modal-link-icon">💬</span>
+        Contact via Discord
+      </a>
+      <a class="modal-link" id="telegram-link" href="#" target="_blank">
+        <span class="modal-link-icon">✈️</span>
+        Contact via Telegram
+      </a>
+    </div>
+    <a class="modal-rewarble" id="rewarble-modal-link" href="#" target="_blank">
+      Don't have a gift card? Buy on Rewarble →
+    </a>
+    <p class="modal-note">We verify & grant access manually after receiving your code.</p>
+  </div>
+</div>
+
+<script>
+  // Pull links from config.json
+  fetch('/config.json')
+    .then(r => r.json())
+    .then(cfg => {
+      if (cfg.discordLink)  document.getElementById('discord-link').href = cfg.discordLink;
+      if (cfg.telegramLink) document.getElementById('telegram-link').href = cfg.telegramLink;
+      if (cfg.rewarbleLink) {
+        document.getElementById('rewarble-link').href = cfg.rewarbleLink;
+        document.getElementById('rewarble-modal-link').href = cfg.rewarbleLink;
+      }
+    })
+    .catch(() => {});
+
+  function openModal() {
+    document.getElementById('buyModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('buyModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOnOverlay(e) {
+    if (e.target === document.getElementById('buyModal')) closeModal();
+  }
+</script>
+
+</body>
+</html>
