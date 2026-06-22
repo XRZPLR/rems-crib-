@@ -1,5 +1,5 @@
 {
-  "discord": "https://discord.gg/aj8Rep3n4V",
+  "discord": "https://discord.gg/j5Rjph9bZr",
   "telegram": "https://t.me/remscrib",
   "tiers": [
     {
@@ -118,8 +118,25 @@
       "hasBoost": false,
       "hasInvites": false,
       "limited": true,
+      "onSale": false,
+      "inviteMsg": "You cannot get this with invites."
+    },
+    {
+      "id": "tier1781160749559",
+      "name": "PREMIUM SERVER",
+      "price": "£85",
+      "label": "Server",
+      "description": "A where you don't need to invite anyone, earn anything, or do anything; you simply receive limitless content.",
+      "borderColor": "#ffffff",
+      "priceColor": "#04ff00",
+      "labelColor": "#00ffe1",
+      "isAccess": true,
+      "invites": 0,
+      "hasBoost": false,
+      "hasInvites": false,
+      "limited": false,
       "onSale": true,
-      "inviteMsg": ""
+      "inviteMsg": "ONE TIME PAYMENT"
     }
   ]
 }
