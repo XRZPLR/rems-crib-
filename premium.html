@@ -78,7 +78,7 @@
       padding: 56px 24px 44px; text-align: center;
       position: relative; overflow: hidden;
     }
-    #particles { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+    #particles { position: absolute; inset: 0; pointer-events: none; z-index: 0; width: 100%; height: 100%; display: block; }
     .hero > *:not(#particles) { position: relative; z-index: 1; }
 
     .limited-badge {
@@ -561,10 +561,11 @@
   /* ── PARTICLES ── */
   const canvas = document.getElementById('particles');
   const ctx = canvas.getContext('2d');
+  const hero = canvas.parentElement;
   let particles = [];
   function resizeCanvas() {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+    canvas.width  = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
   }
   function createParticle() {
     return {
