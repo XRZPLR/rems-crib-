@@ -502,10 +502,12 @@
   <h2 class="sec-title">FAQ</h2>
   <div class="faq-item">
     <div class="faq-q" onclick="toggleFaq(this)">How fast do I get access? <span class="faq-arrow">▼</span></div>
-    <div class="faq-a"><div class="faq-a-inner">Usually within minutes. Once you send us your payment via Discord or Telegram, we verify it and manually to ensure complete verification. We don't leave people waiting. </div></div>
+    <div class="faq-a"><div class="faq-a-inner">Usually within minutes. Once you DM us on Discord or Telegram, we verify your payment and manually send your invite. We don't leave people waiting.</div></div>
   </div>
   <div class="faq-item">
     <div class="faq-q" onclick="toggleFaq(this)">Is access really permanent? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a"><div class="faq-a-inner">Yes. One payment, no renewals, no subscriptions. Once you're in, you're in for good. You'll also continue to receive all future updates and drops at no extra cost.</div></div>
+  </div>
   <div class="faq-item">
     <div class="faq-q" onclick="toggleFaq(this)">What if something goes wrong? <span class="faq-arrow">▼</span></div>
     <div class="faq-a"><div class="faq-a-inner">DM us on Discord or Telegram and we'll sort it out immediately. We take every order seriously and make sure every customer is happy before we close it off.</div></div>
@@ -541,7 +543,7 @@
         <span class="modal-link-icon">✈️</span> Contact via Telegram
       </a>
     </div>
-    <p class="modal-note">We verify &amp; grant access manually after receiving your code.</p>
+    <p class="modal-note">We verify &amp; grant access manually — usually within minutes.</p>
   </div>
 </div>
 
@@ -567,25 +569,43 @@
   function createParticle() {
     return {
       x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      size: Math.random() * 2 + 0.5,
-      speedX: (Math.random() - 0.5) * 0.4,
-      speedY: -Math.random() * 0.6 - 0.2,
-      opacity: Math.random() * 0.6 + 0.1,
-      life: 1
+      y: canvas.height + 10,
+      size: Math.random() * 2.5 + 0.8,
+      speedX: (Math.random() - 0.5) * 0.3,
+      speedY: -(Math.random() * 0.5 + 0.15),
+      maxOpacity: Math.random() * 0.55 + 0.15,
+      opacity: 0,
+      fadeIn: true,
+      life: 0,
+      maxLife: Math.random() * 180 + 120
     };
   }
   function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    while (particles.length < 55) particles.push(createParticle());
-    particles = particles.filter(p => p.life > 0);
+    while (particles.length < 70) particles.push(createParticle());
+    particles = particles.filter(p => p.life < p.maxLife);
     particles.forEach(p => {
-      p.x += p.speedX; p.y += p.speedY; p.life -= 0.003;
-      const alpha = p.opacity * p.life;
+      p.life++;
+      p.x += p.speedX + Math.sin(p.life * 0.02) * 0.15;
+      p.y += p.speedY;
+      // Smooth fade in first 20% of life, fade out last 30%
+      const fadeInEnd = p.maxLife * 0.2;
+      const fadeOutStart = p.maxLife * 0.7;
+      if (p.life < fadeInEnd) {
+        p.opacity = (p.life / fadeInEnd) * p.maxOpacity;
+      } else if (p.life > fadeOutStart) {
+        p.opacity = ((p.maxLife - p.life) / (p.maxLife - fadeOutStart)) * p.maxOpacity;
+      } else {
+        p.opacity = p.maxOpacity;
+      }
+      ctx.save();
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = `rgba(255, 215, 0, ${p.opacity * 0.8})`;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 215, 0, ${alpha})`;
+      ctx.fillStyle = `rgba(255, 215, 0, ${p.opacity})`;
       ctx.fill();
+      ctx.restore();
     });
     requestAnimationFrame(animateParticles);
   }
