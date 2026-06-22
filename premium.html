@@ -13,8 +13,6 @@
       --gold-light: #FFD700;
       --gold-dark: #8B6914;
       --bg: #0a0800;
-      --bg2: #111000;
-      --bg3: #1a1400;
       --card: #141000;
       --red: #D32F2F;
       --text: #f5e6c0;
@@ -28,32 +26,30 @@
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
+      padding-bottom: 90px;
     }
 
     /* ── LOADING ── */
     #loading {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: #050400;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      gap: 20px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 9999; gap: 20px;
       transition: opacity 0.5s ease;
     }
     #loading.fade-out { opacity: 0; pointer-events: none; }
-    .load-crown { font-size: 56px; animation: crownPulse 1.6s ease-in-out infinite; }
+    .load-crown {
+      width: 72px; height: 72px;
+      object-fit: contain;
+      animation: crownPulse 1.6s ease-in-out infinite;
+      filter: drop-shadow(0 0 16px rgba(255,215,0,0.6));
+    }
     .load-text {
       font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 20px;
-      letter-spacing: 8px;
-      text-transform: uppercase;
+      font-size: 20px; letter-spacing: 8px; text-transform: uppercase;
       background: linear-gradient(90deg, var(--gold-dark), var(--gold-light), var(--gold-dark));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     .load-bar { width: 160px; height: 1px; background: rgba(255,255,255,0.08); overflow: hidden; }
     .load-bar-fill {
@@ -64,344 +60,281 @@
     @keyframes loadfill { from { width: 0; } to { width: 100%; } }
     @keyframes crownPulse {
       0%,100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-5px) scale(1.07); }
+      50% { transform: translateY(-6px) scale(1.08); }
     }
 
     /* ── NAV ── */
-    .back-nav { padding: 24px 36px 0; }
+    .back-nav { padding: 24px 36px 0; position: relative; z-index: 2; }
     .back-btn {
       font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 14px;
-      color: var(--text-muted);
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 3px;
+      font-size: 14px; color: var(--text-muted);
+      text-decoration: none; text-transform: uppercase; letter-spacing: 3px;
       transition: color 0.2s;
     }
     .back-btn:hover { color: var(--gold); }
 
     /* ── HERO ── */
-    .hero { padding: 56px 24px 44px; text-align: center; }
+    .hero {
+      padding: 56px 24px 44px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    #particles { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+    .hero > *:not(#particles) { position: relative; z-index: 1; }
 
     .limited-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: var(--red);
-      color: white;
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--red); color: white;
       font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 12px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      padding: 7px 20px;
-      border-radius: 100px;
-      margin-bottom: 28px;
+      font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+      padding: 7px 20px; border-radius: 100px; margin-bottom: 28px;
       box-shadow: 0 4px 28px rgba(211,47,47,0.5);
       animation: badgePulse 2s ease-in-out infinite;
     }
     @keyframes badgePulse {
       0%,100% { box-shadow: 0 4px 28px rgba(211,47,47,0.5); }
-      50% { box-shadow: 0 4px 44px rgba(211,47,47,0.8); }
+      50% { box-shadow: 0 4px 44px rgba(211,47,47,0.85); }
     }
 
     .crown-icon {
-      font-size: 64px;
-      display: block;
-      margin-bottom: 12px;
-      filter: drop-shadow(0 0 24px rgba(255,215,0,0.5));
+      width: 80px; height: 80px; object-fit: contain;
+      display: block; margin: 0 auto 16px;
+      filter: drop-shadow(0 0 28px rgba(255,215,0,0.55));
       animation: float 3s ease-in-out infinite;
     }
     @keyframes float {
       0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-10px); }
     }
 
     .hero-title {
       font-family: 'Big Shoulders Display', sans-serif;
-      font-size: clamp(58px, 12vw, 108px);
-      line-height: 0.86;
+      font-size: clamp(58px, 12vw, 108px); line-height: 0.86;
       text-transform: uppercase;
       background: linear-gradient(160deg, #6b4e0a 0%, #FFD700 35%, #fff3a0 55%, #FFD700 70%, #8B6914 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       margin-bottom: 16px;
     }
-
     .hero-sub {
       font-family: 'Big Shoulders Display', sans-serif;
-      font-size: clamp(13px, 3vw, 20px);
-      text-transform: uppercase;
-      letter-spacing: 6px;
-      color: var(--text-muted);
-      margin-bottom: 40px;
+      font-size: clamp(13px, 3vw, 20px); text-transform: uppercase;
+      letter-spacing: 6px; color: var(--text-muted); margin-bottom: 40px;
     }
-
     .gold-line {
-      width: 80px;
-      height: 1px;
+      width: 80px; height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
       margin: 0 auto 56px;
     }
 
     /* ── PRICE CARD ── */
     .price-wrap { display: flex; justify-content: center; padding: 0 24px 64px; }
-
     .price-card {
       background: linear-gradient(145deg, #0e0b00, #1c1500, #0e0b00);
-      border: 1px solid rgba(201,162,39,0.3);
-      border-radius: 24px;
-      padding: 52px 48px;
-      text-align: center;
-      max-width: 420px;
-      width: 100%;
-      position: relative;
-      overflow: hidden;
+      border: 1px solid rgba(201,162,39,0.3); border-radius: 24px;
+      padding: 52px 48px; text-align: center; max-width: 420px; width: 100%;
+      position: relative; overflow: hidden;
       box-shadow: 0 0 80px rgba(201,162,39,0.12), 0 32px 64px rgba(0,0,0,0.5);
     }
     .price-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 1px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
     }
-    .price-card::after {
-      content: '';
-      position: absolute;
-      top: -80px; left: 50%; transform: translateX(-50%);
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(201,162,39,0.08) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
     .price-eyebrow {
       font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 11px;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.7;
-      margin-bottom: 16px;
+      font-size: 11px; letter-spacing: 6px; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7; margin-bottom: 16px;
     }
-
     .price-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 6px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 20px; margin-bottom: 6px;
     }
-
     .price-old {
       font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 38px;
-      color: rgba(255,255,255,0.2);
-      text-decoration: line-through;
+      font-size: 38px; color: rgba(255,255,255,0.2); text-decoration: line-through;
     }
-
     .price-new {
-      font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 88px;
-      line-height: 1;
+      font-family: 'Big Shoulders Display', sans-serif; font-size: 88px; line-height: 1;
       background: linear-gradient(135deg, #FFD700, #fff3a0, #FFD700);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .price-new .cur {
-      font-size: 40px;
-      vertical-align: top;
-      margin-top: 16px;
-      display: inline-block;
-    }
-
-    .price-note {
-      font-size: 11px;
-      color: rgba(255,255,255,0.2);
-      letter-spacing: 2px;
-      margin-bottom: 36px;
-    }
-
+    .price-new .cur { font-size: 40px; vertical-align: top; margin-top: 16px; display: inline-block; }
+    .price-note { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 2px; margin-bottom: 36px; }
     .buy-btn {
       display: inline-block;
       background: linear-gradient(135deg, #6b4e0a, #FFD700, #C9A227, #6b4e0a);
       background-size: 250% auto;
-      color: #0a0800;
-      font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 22px;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      padding: 18px 60px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
+      color: #0a0800; font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 22px; text-transform: uppercase; letter-spacing: 3px;
+      padding: 18px 60px; border-radius: 12px; border: none; cursor: pointer;
       transition: background-position 0.6s ease, transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 8px 32px rgba(201,162,39,0.4);
-      font-weight: 900;
+      box-shadow: 0 8px 32px rgba(201,162,39,0.4); font-weight: 900;
     }
-    .buy-btn:hover {
-      background-position: right center;
-      transform: translateY(-3px);
-      box-shadow: 0 14px 48px rgba(255,215,0,0.55);
-    }
+    .buy-btn:hover { background-position: right center; transform: translateY(-3px); box-shadow: 0 14px 48px rgba(255,215,0,0.55); }
     .buy-btn:active { transform: translateY(0); }
+
+    /* ── STICKY BUY ── */
+    .sticky-buy {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: rgba(10, 8, 0, 0.92);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(201,162,39,0.25);
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      z-index: 500;
+      transform: translateY(100%);
+      transition: transform 0.35s ease;
+    }
+    .sticky-buy.visible { transform: translateY(0); }
+    .sticky-buy-text {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 18px; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--text);
+    }
+    .sticky-buy-text span {
+      background: linear-gradient(135deg, #FFD700, #fff3a0);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .sticky-btn {
+      background: linear-gradient(135deg, #6b4e0a, #FFD700, #C9A227);
+      background-size: 200% auto;
+      color: #0a0800; font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 16px; text-transform: uppercase; letter-spacing: 2px;
+      padding: 12px 32px; border-radius: 10px; border: none; cursor: pointer;
+      font-weight: 900; white-space: nowrap;
+      transition: background-position 0.5s, transform 0.2s;
+      box-shadow: 0 4px 20px rgba(201,162,39,0.4);
+    }
+    .sticky-btn:hover { background-position: right center; transform: translateY(-2px); }
 
     /* ── DIVIDER ── */
     .divider {
       height: 1px;
       background: linear-gradient(90deg, transparent, rgba(201,162,39,0.4), rgba(255,215,0,0.6), rgba(201,162,39,0.4), transparent);
-      max-width: 680px;
-      margin: 0 auto 64px;
+      max-width: 680px; margin: 0 auto 64px;
     }
 
-    /* ── SECTION TITLE ── */
+    /* ── SECTIONS ── */
     .sec { padding: 0 24px 64px; max-width: 960px; margin: 0 auto; }
     .sec-title {
       font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 36px;
-      text-transform: uppercase;
-      letter-spacing: 4px;
+      font-size: 36px; text-transform: uppercase; letter-spacing: 4px;
       background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-align: center;
-      margin-bottom: 36px;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      text-align: center; margin-bottom: 36px;
     }
 
     /* ── FEATURES ── */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 12px;
-    }
-
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
     .feat {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px 20px;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 22px 20px;
+      display: flex; align-items: flex-start; gap: 14px;
       transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
-    .feat:hover {
-      border-color: rgba(201,162,39,0.5);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(201,162,39,0.1);
-    }
+    .feat:hover { border-color: rgba(201,162,39,0.5); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(201,162,39,0.1); }
     .feat-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
     .feat-name {
       font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 18px;
-      text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 4px;
+      font-size: 18px; text-transform: uppercase; color: var(--text); margin-bottom: 4px;
     }
     .feat-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
 
     /* ── COMPARE ── */
-    .compare-sec { padding: 0 24px 64px; max-width: 720px; margin: 0 auto; }
-
-    .compare-card {
-      background: var(--card);
-      border: 1px solid rgba(201,162,39,0.35);
-      border-radius: 20px;
-      padding: 36px 40px;
-      box-shadow: 0 8px 48px rgba(0,0,0,0.4);
+    .compare-sec { padding: 0 24px 64px; max-width: 760px; margin: 0 auto; }
+    .compare-cols {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
     }
-
-    .compare-head {
-      display: grid;
-      grid-template-columns: 1fr 48px 1fr;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
+    .compare-col {
+      border-radius: 16px; padding: 24px 20px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .compare-col.premium {
+      background: linear-gradient(145deg, #1a1200, #241900);
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 32px rgba(201,162,39,0.15);
+    }
+    .compare-col.tier {
+      background: rgba(255,255,255,0.02);
+      border: 2px solid rgba(255,255,255,0.12);
+    }
+    .col-header {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+      padding-bottom: 12px;
+      border-bottom: 1px solid;
       margin-bottom: 4px;
     }
-    .ch-label {
-      font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .ch-label.r { text-align: right; }
-
-    .compare-row {
-      display: grid;
-      grid-template-columns: 1fr 48px 1fr;
-      align-items: center;
-      padding: 13px 0;
-      border-bottom: 1px solid rgba(201,162,39,0.08);
-    }
-    .compare-row:last-child { border-bottom: none; }
-
-    .c-premium { color: var(--gold); font-weight: 600; font-size: 14px; }
-    .c-x40 {
-      font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 22px;
+    .compare-col.premium .col-header { color: var(--gold); border-color: rgba(201,162,39,0.3); }
+    .compare-col.tier .col-header { color: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.08); }
+    .col-item { font-size: 13px; line-height: 1.5; }
+    .compare-col.premium .col-item { color: var(--text); }
+    .compare-col.tier .col-item { color: rgba(255,255,255,0.2); text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.1); }
+    .col-item-gold {
+      font-family: 'Big Shoulders Display', sans-serif; font-size: 20px;
       background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .c-vs {
-      text-align: center;
-      font-size: 10px;
-      letter-spacing: 1px;
-      color: rgba(255,255,255,0.1);
-      text-transform: uppercase;
-    }
-    .c-tier { color: rgba(255,255,255,0.2); font-size: 13px; text-align: right; }
 
     /* ── SATISFACTION ── */
-    .sat-sec { padding: 0 24px 80px; max-width: 600px; margin: 0 auto; }
+    .sat-sec { padding: 0 24px 64px; max-width: 600px; margin: 0 auto; }
     .sat-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 52px 40px;
-      text-align: center;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 52px 40px; text-align: center;
       box-shadow: 0 8px 48px rgba(0,0,0,0.4);
     }
-    .sat-stars { font-size: 36px; letter-spacing: 6px; margin-bottom: 20px; }
+    .sat-stars { font-size: 34px; letter-spacing: 6px; margin-bottom: 18px; }
     .sat-title {
       font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 28px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      font-size: 28px; text-transform: uppercase; letter-spacing: 2px;
       background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       margin-bottom: 14px;
     }
     .sat-text { font-size: 14px; color: var(--text-muted); line-height: 1.8; max-width: 380px; margin: 0 auto; }
 
+    /* ── FAQ ── */
+    .faq-sec { padding: 0 24px 64px; max-width: 720px; margin: 0 auto; }
+    .faq-item {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; margin-bottom: 10px; overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item.open { border-color: rgba(201,162,39,0.45); }
+    .faq-q {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; cursor: pointer;
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 18px; text-transform: uppercase; letter-spacing: 1px;
+      color: var(--text); gap: 16px;
+      user-select: none;
+    }
+    .faq-arrow {
+      font-size: 14px; color: var(--gold); flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s ease;
+    }
+    .faq-item.open .faq-a { max-height: 200px; }
+    .faq-a-inner {
+      padding: 0 24px 20px;
+      font-size: 14px; color: var(--text-muted); line-height: 1.75;
+    }
+
     /* ── MODAL ── */
     .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(10px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 24px;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+      display: none; align-items: center; justify-content: center;
+      z-index: 1000; padding: 24px;
     }
     .modal-overlay.active { display: flex; }
-
     .modal {
       background: linear-gradient(145deg, #0e0b00, #1c1500);
-      border: 1px solid rgba(201,162,39,0.4);
-      border-radius: 24px;
-      padding: 48px 40px 36px;
-      max-width: 420px;
-      width: 100%;
-      text-align: center;
-      position: relative;
+      border: 1px solid rgba(201,162,39,0.4); border-radius: 24px;
+      padding: 48px 40px 36px; max-width: 420px; width: 100%;
+      text-align: center; position: relative;
       box-shadow: 0 0 80px rgba(201,162,39,0.15), 0 32px 64px rgba(0,0,0,0.7);
       animation: modalIn 0.25s ease;
     }
@@ -410,93 +343,60 @@
       to   { opacity: 1; transform: scale(1) translateY(0); }
     }
     .modal::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 1px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
       border-radius: 24px 24px 0 0;
     }
-
     .modal-close {
-      position: absolute;
-      top: 14px; right: 18px;
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.25);
-      font-size: 20px;
-      cursor: pointer;
-      transition: color 0.2s;
+      position: absolute; top: 14px; right: 18px;
+      background: none; border: none; color: rgba(255,255,255,0.25);
+      font-size: 20px; cursor: pointer; transition: color 0.2s;
     }
     .modal-close:hover { color: white; }
-
-    .modal-crown { font-size: 42px; margin-bottom: 10px; }
+    .modal-crown {
+      width: 52px; height: 52px; object-fit: contain;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 12px rgba(255,215,0,0.5));
+    }
     .modal-title {
       font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 32px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: white;
-      margin-bottom: 6px;
+      font-size: 32px; text-transform: uppercase; letter-spacing: 2px;
+      color: white; margin-bottom: 6px;
     }
-    .modal-sub { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 28px; }
-
-    .modal-links { display: flex; flex-direction: column; gap: 12px; }
-
-    .modal-link {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(201,162,39,0.25);
-      border-radius: 12px;
-      padding: 16px 20px;
-      text-decoration: none;
-      color: white;
-      font-size: 15px;
-      font-weight: 500;
-      transition: background 0.2s, border-color 0.2s, transform 0.15s;
-    }
-    .modal-link:hover {
-      background: rgba(201,162,39,0.1);
-      border-color: var(--gold);
-      transform: translateX(4px);
-    }
-    .modal-link-icon { font-size: 22px; }
-    .modal-note { font-size: 11px; color: rgba(255,255,255,0.15); margin-top: 20px; }
-
+    .modal-sub { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 16px; }
     .copy-box {
-      background: rgba(201,162,39,0.08);
-      border: 1px solid rgba(201,162,39,0.3);
-      border-radius: 10px;
-      padding: 14px 18px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
-      text-align: left;
+      background: rgba(201,162,39,0.08); border: 1px solid rgba(201,162,39,0.3);
+      border-radius: 10px; padding: 14px 18px; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; cursor: pointer; transition: background 0.2s, border-color 0.2s; text-align: left;
     }
     .copy-box:hover { background: rgba(201,162,39,0.14); border-color: var(--gold); }
     .copy-box span:first-child { font-size: 13px; color: var(--text); flex: 1; line-height: 1.5; }
-    .copy-icon { font-size: 18px; flex-shrink: 0; transition: transform 0.2s; }
-    .copy-box:hover .copy-icon { transform: scale(1.15); }
+    .copy-icon { font-size: 18px; flex-shrink: 0; }
+    .modal-links { display: flex; flex-direction: column; gap: 12px; }
+    .modal-link {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(201,162,39,0.25);
+      border-radius: 12px; padding: 16px 20px;
+      text-decoration: none; color: white; font-size: 15px; font-weight: 500;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+    .modal-link:hover { background: rgba(201,162,39,0.1); border-color: var(--gold); transform: translateX(4px); }
+    .modal-link-icon { font-size: 22px; }
+    .modal-note { font-size: 11px; color: rgba(255,255,255,0.15); margin-top: 20px; }
 
     @media (max-width: 580px) {
       .price-card { padding: 36px 24px; }
-      .compare-card { padding: 24px 16px; }
-      .c-vs { display: none; }
-      .compare-row { grid-template-columns: 1fr 1fr; }
-      .c-tier { text-align: left; }
+      .compare-cols { grid-template-columns: 1fr; }
       .modal { padding: 40px 24px 28px; }
+      .sticky-buy-text { font-size: 14px; }
     }
   </style>
 </head>
 <body>
 
 <div id="loading">
-  <div class="load-crown">👑</div>
+  <img class="load-crown" src="https://i.postimg.cc/K8PNY0Zq/crown.png" alt="crown" />
   <div class="load-text">Premium</div>
   <div class="load-bar"><div class="load-bar-fill"></div></div>
 </div>
@@ -514,15 +414,18 @@
   <a href="/" class="back-btn">← Rem's Crib</a>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
+  <canvas id="particles"></canvas>
   <div class="limited-badge">🔥 Limited Offer</div>
-  <span class="crown-icon">👑</span>
+  <img class="crown-icon" src="https://i.postimg.cc/K8PNY0Zq/crown.png" alt="crown" />
   <h1 class="hero-title">Premium<br>Server</h1>
   <p class="hero-sub">The Ultimate Access Pass</p>
   <div class="gold-line"></div>
 </section>
 
-<div class="price-wrap">
+<!-- PRICE -->
+<div class="price-wrap" id="priceCard">
   <div class="price-card">
     <p class="price-eyebrow">One-Time Payment</p>
     <div class="price-row">
@@ -536,6 +439,7 @@
 
 <div class="divider"></div>
 
+<!-- FEATURES -->
 <section class="sec">
   <h2 class="sec-title">What's Inside</h2>
   <div class="features-grid">
@@ -553,25 +457,36 @@
 
 <div class="divider"></div>
 
+<!-- COMPARE -->
 <section class="compare-sec">
   <h2 class="sec-title">vs Tier 5</h2>
-  <div class="compare-card">
-    <div class="compare-head">
-      <div class="ch-label">Premium Server</div>
-      <div></div>
-      <div class="ch-label r">Tier 5</div>
+  <div class="compare-cols">
+    <div class="compare-col premium">
+      <div class="col-header">Premium Server</div>
+      <div class="col-item"><span class="col-item-gold">×40</span> More Content</div>
+      <div class="col-item">✓ Websites Included</div>
+      <div class="col-item">✓ Permanent Access</div>
+      <div class="col-item">✓ Premium Server Role</div>
+      <div class="col-item">✓ Priority Support</div>
+      <div class="col-item">✓ Frequent Updates</div>
+      <div class="col-item">✓ Exclusive Drops</div>
     </div>
-    <div class="compare-row"><div><span class="c-x40">×40</span> <span class="c-premium">More Content</span></div><div class="c-vs">vs</div><div class="c-tier">Standard content</div></div>
-    <div class="compare-row"><div class="c-premium">✓ Websites Included</div><div class="c-vs">vs</div><div class="c-tier">Not included</div></div>
-    <div class="compare-row"><div class="c-premium">✓ Permanent Access</div><div class="c-vs">vs</div><div class="c-tier">Tier access only</div></div>
-    <div class="compare-row"><div class="c-premium">✓ Premium Server Role</div><div class="c-vs">vs</div><div class="c-tier">No role</div></div>
-    <div class="compare-row"><div class="c-premium">✓ Priority Support</div><div class="c-vs">vs</div><div class="c-tier">Standard support</div></div>
-    <div class="compare-row"><div class="c-premium">✓ Frequent Updates</div><div class="c-vs">vs</div><div class="c-tier">No updates</div></div>
+    <div class="compare-col tier">
+      <div class="col-header">Tier 5</div>
+      <div class="col-item">Standard content</div>
+      <div class="col-item">Not included</div>
+      <div class="col-item">Tier access only</div>
+      <div class="col-item">No role</div>
+      <div class="col-item">Standard support</div>
+      <div class="col-item">No updates</div>
+      <div class="col-item">No early access</div>
+    </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
+<!-- SATISFACTION -->
 <section class="sat-sec">
   <div class="sat-card">
     <div class="sat-stars">⭐⭐⭐⭐⭐</div>
@@ -580,14 +495,47 @@
   </div>
 </section>
 
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section class="faq-sec">
+  <h2 class="sec-title">FAQ</h2>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">How fast do I get access? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a"><div class="faq-a-inner">Usually within minutes. Once you send us your Rewarble gift card code via Discord or Telegram, we verify it and manually send your invite. We don't leave people waiting.</div></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is access really permanent? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a"><div class="faq-a-inner">Yes. One payment, no renewals, no subscriptions. Once you're in, you're in for good. You'll also continue to receive all future updates and drops at no extra cost.</div></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What's a Rewarble gift card? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a"><div class="faq-a-inner">Rewarble is a platform that lets you buy PayPal GBP gift cards instantly. It's the payment method we use. Buy a £85 card, copy the code, and DM it to us — that's all.</div></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What if something goes wrong? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a"><div class="faq-a-inner">DM us on Discord or Telegram and we'll sort it out immediately. We take every order seriously and make sure every customer is happy before we close it off.</div></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is this different from the tiers? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a"><div class="faq-a-inner">Very much so. The Premium Server has ×40 more content than Tier 5, includes websites, bots, mega links, an exclusive role, priority support, and permanent access. It's the full package.</div></div>
+  </div>
+</section>
+
+<!-- STICKY BUY BAR -->
+<div class="sticky-buy" id="stickyBuy">
+  <div class="sticky-buy-text">Premium Server — <span>£85</span></div>
+  <button class="sticky-btn" onclick="openModal()">Buy Now</button>
+</div>
+
 <!-- MODAL -->
 <div class="modal-overlay" id="buyModal" onclick="closeOnOverlay(event)">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-crown">👑</div>
+    <img class="modal-crown" src="https://i.postimg.cc/K8PNY0Zq/crown.png" alt="crown" />
     <div class="modal-title">Buy Premium</div>
     <div class="modal-sub">Copy the message below and send it to us</div>
-    <div class="copy-box" onclick="copyMsg()" id="copyBox">
+    <div class="copy-box" onclick="copyMsg()">
       <span id="copyText">Hi, I'd like to buy the PREMIUM SERVER!</span>
       <span class="copy-icon" id="copyIcon">📋</span>
     </div>
@@ -604,6 +552,7 @@
 </div>
 
 <script>
+  /* ── CONFIG ── */
   let _cfg = {};
   fetch('/config.json?' + Date.now())
     .then(r => r.json())
@@ -611,17 +560,68 @@
       _cfg = c;
       if (c.discord)  document.getElementById('discord-link').href  = c.discord;
       if (c.telegram) document.getElementById('telegram-link').href = c.telegram;
-    })
-    .catch(() => {});
+    }).catch(() => {});
 
+  /* ── PARTICLES ── */
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  function resizeCanvas() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  function createParticle() {
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 2 + 0.5,
+      speedX: (Math.random() - 0.5) * 0.4,
+      speedY: -Math.random() * 0.6 - 0.2,
+      opacity: Math.random() * 0.6 + 0.1,
+      life: 1
+    };
+  }
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    while (particles.length < 55) particles.push(createParticle());
+    particles = particles.filter(p => p.life > 0);
+    particles.forEach(p => {
+      p.x += p.speedX; p.y += p.speedY; p.life -= 0.003;
+      const alpha = p.opacity * p.life;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 215, 0, ${alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(animateParticles);
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+  animateParticles();
+
+  /* ── STICKY BUY ── */
+  const priceCard = document.getElementById('priceCard');
+  const stickyBuy = document.getElementById('stickyBuy');
+  const observer = new IntersectionObserver(entries => {
+    stickyBuy.classList.toggle('visible', !entries[0].isIntersecting);
+  }, { threshold: 0 });
+  observer.observe(priceCard);
+
+  /* ── FAQ ── */
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* ── MODAL ── */
   function copyMsg() {
-    const msg = "Hi, I'd like to buy the PREMIUM SERVER!";
-    navigator.clipboard.writeText(msg).then(() => {
+    navigator.clipboard.writeText("Hi, I'd like to buy the PREMIUM SERVER!").then(() => {
       document.getElementById('copyIcon').textContent = '✅';
       setTimeout(() => document.getElementById('copyIcon').textContent = '📋', 2000);
     });
   }
-
   function openModal() {
     document.getElementById('buyModal').classList.add('active');
     document.body.style.overflow = 'hidden';
