@@ -464,6 +464,25 @@
     .modal-link-icon { font-size: 22px; }
     .modal-note { font-size: 11px; color: rgba(255,255,255,0.15); margin-top: 20px; }
 
+    .copy-box {
+      background: rgba(201,162,39,0.08);
+      border: 1px solid rgba(201,162,39,0.3);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      text-align: left;
+    }
+    .copy-box:hover { background: rgba(201,162,39,0.14); border-color: var(--gold); }
+    .copy-box span:first-child { font-size: 13px; color: var(--text); flex: 1; line-height: 1.5; }
+    .copy-icon { font-size: 18px; flex-shrink: 0; transition: transform 0.2s; }
+    .copy-box:hover .copy-icon { transform: scale(1.15); }
+
     @media (max-width: 580px) {
       .price-card { padding: 36px 24px; }
       .compare-card { padding: 24px 16px; }
@@ -528,6 +547,7 @@
     <div class="feat"><span class="feat-icon">⚡</span><div><div class="feat-name">Priority Support</div><div class="feat-desc">Your requests come first — faster responses and dedicated help, every time.</div></div></div>
     <div class="feat"><span class="feat-icon">🔄</span><div><div class="feat-name">Frequent Updates</div><div class="feat-desc">New content added regularly — your server keeps growing automatically.</div></div></div>
     <div class="feat"><span class="feat-icon">♾️</span><div><div class="feat-name">Permanent Access</div><div class="feat-desc">One payment. No subscriptions. No renewals. Lifetime access, full stop.</div></div></div>
+    <div class="feat"><span class="feat-icon">🎁</span><div><div class="feat-name">Exclusive Drops</div><div class="feat-desc">Premium members get first access to new drops and releases before anyone else.</div></div></div>
   </div>
 </section>
 
@@ -566,7 +586,11 @@
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-crown">👑</div>
     <div class="modal-title">Buy Premium</div>
-    <div class="modal-sub">DM us with your £85 Rewarble PayPal gift card code</div>
+    <div class="modal-sub">Copy the message below and send it to us</div>
+    <div class="copy-box" onclick="copyMsg()" id="copyBox">
+      <span id="copyText">Hi, I'd like to buy the PREMIUM SERVER!</span>
+      <span class="copy-icon" id="copyIcon">📋</span>
+    </div>
     <div class="modal-links">
       <a class="modal-link" id="discord-link" href="#" target="_blank">
         <span class="modal-link-icon">💬</span> Contact via Discord
@@ -589,6 +613,14 @@
       if (c.telegram) document.getElementById('telegram-link').href = c.telegram;
     })
     .catch(() => {});
+
+  function copyMsg() {
+    const msg = "Hi, I'd like to buy the PREMIUM SERVER!";
+    navigator.clipboard.writeText(msg).then(() => {
+      document.getElementById('copyIcon').textContent = '✅';
+      setTimeout(() => document.getElementById('copyIcon').textContent = '📋', 2000);
+    });
+  }
 
   function openModal() {
     document.getElementById('buyModal').classList.add('active');
